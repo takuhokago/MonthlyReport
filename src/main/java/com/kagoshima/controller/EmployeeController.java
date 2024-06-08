@@ -180,7 +180,6 @@ public class EmployeeController {
         model.addAttribute("reportList", userReports);
         model.addAttribute("listSize", userReports.size());
 
-
         return "employees/roleGen/profile";
     }
 
