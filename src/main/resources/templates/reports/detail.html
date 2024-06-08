@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: head_fragment(title=月報詳細)"></head>
+
+<body class="h-100 overflow-auto">
+    <div class="row h-100">
+        <div class="h-100 p-3 mb-2 bg-dark text-white col-sm-2">
+            <nav th:replace="common/side :: copy"></nav>
+        </div>
+
+        <div class="mt-3 h-100 col-sm-10">
+            <div class="container-fluid p-0">
+                <h1 class="h3 mb-3">月報 詳細</h1>
+            </div>
+
+            <div class="mb-3">
+                <div class="row g-1">
+                    <div class="col-auto">
+                        <a th:href="@{/reports/update/{id}/(id=${report.id})}" class="btn btn-primary"
+                            th:style="${employee.role.name} == 'ADMIN' or ${employee.code} == ${report.employee.code}? 'display:block' : 'display:none'">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor"
+                                class="bi bi-pencil" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                            </svg>
+                            編集
+                        </a>
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal"
+                            th:style="${employee.role.name} == 'ADMIN' or ${employee.code} == ${report.employee.code}? 'display:block' : 'display:none'">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor"
+                                class="bi bi-trash" viewBox="1 0 16 17">
+                                <path
+                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                <path fill-rule="evenodd"
+                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                            </svg>
+                            削除
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">削除確認</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        本当に削除しますか？
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <form name="form" th:action="@{/reports/{id}/delete(id=${id})}"
+                                            th:method="post">
+                                            <input type="submit" value="削除" class="btn btn-primary"
+                                                th:style="${employee.role.name} == 'ADMIN' or ${employee.code} == ${report.employee.code}? 'display:block' : 'display:none'">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-auto">
+                        <a th:href="@{/reports}" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor"
+                                class="bi bi-arrow-return-left" viewBox="1 0 16 17">
+                                <path fill-rule="evenodd"
+                                    d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z" />
+                            </svg>
+                            戻る
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <span th:if="${deleteError} neq null" th:text="${deleteError}" class="text-danger"></span>
+
+            <table class="table table-striped">
+                <tr>
+                    <th class="w-25">日付</th>
+                    <td class="align-middle" th:text="${#temporals.format(report.reportDate, 'yyyy/MM')}"></td>
+                </tr>
+                <tr>
+                    <th>氏名</th>
+                    <td class="align-middle" th:text="${report.employee.lastName} + ' ' + ${report.employee.firstName}">
+                    </td>
+                </tr>
+                <tr>
+                    <th>所属</th>
+                    <td class="align-middle" th:text="${report.employee.Affiliation.getValue}"></td>
+                </tr>
+                <tr>
+                    <th>登録日時</th>
+                    <td class="align-middle" th:text="${#temporals.format(report.createdAt, 'yyyy-MM-dd hh:mm:ss')}">
+                    </td>
+                </tr>
+                <tr>
+                    <th>更新日時</th>
+                    <td class="align-middle" th:text="${#temporals.format(report.updatedAt, 'yyyy-MM-dd hh:mm:ss')}">
+                    </td>
+                </tr>
+                <tr>
+                    <th>完了</th>
+                    <td class="align-middle">
+                        <svg th:if="${report.completeFlg}" xmlns="http://www.w3.org/2000/svg" width="21" height="21"
+                            fill="green" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                        </svg>
+                        <svg th:if="${!report.completeFlg}" xmlns="http://www.w3.org/2000/svg" width="19" height="16"
+                            fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z" />
+                    </td>
+                </tr>
+            </table>
+
+            <form th:action="@{/reports/add}" th:object="${report}" th:method="post">
+                <div class="wizard wizard-success mb-4">
+                    <div class="mb-3">
+                        <div class="card">
+                            <div class="card-header">
+                                現場関係
+                            </div>
+                            <div class="card-body">
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="contentBusiness">業務環境/開発環境</label>
+                                    <p class="mb-1"></p>
+                                    <textarea class="form-control" type="text" th:field="*{contentBusiness}"
+                                        th:errorclass="err" id="contentBusiness" rows="5" readonly></textarea>
+                                    <span th:errors="*{contentBusiness}" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    時間
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="mb-3">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <label class="form-label" for="timeWorked">勤務時間</label>
+                                                                <p class="mb-1"></p>
+                                                                <div class="input-group">
+                                                                    <input class="form-control" type="number"
+                                                                        th:field="*{timeWorked}" th:errorclass="err"
+                                                                        id="timeWorked" min="0" max="200"
+                                                                        readonly></input>
+                                                                    <span class="input-group-text">時間</span>
+                                                                </div>
+                                                                <span th:errors="*{timeWorked}"
+                                                                    class="text-danger"></span>
+                                                            </div>
+                                                            <div class="col">
+                                                                <label class="form-label" for="timeOver">残業時間</label>
+                                                                <p class="mb-1"></p>
+                                                                <div class="input-group">
+                                                                    <input class="form-control" type="number"
+                                                                        th:field="*{timeOver}" th:errorclass="err"
+                                                                        id="timeOver" min="0" max="200"
+                                                                        readonly></input>
+                                                                    <span class="input-group-text">時間</span>
+                                                                </div>
+                                                                <span th:errors="*{timeOver}"
+                                                                    class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    目標達成率
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="mb-3">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <label class="form-label"
+                                                                    for="rateBusiness">業務目標達成率</label>
+                                                                <p class="mb-1"></p>
+                                                                <div class="input-group">
+                                                                    <input class="form-control" type="number"
+                                                                        th:field="*{rateBusiness}" th:errorclass="err"
+                                                                        id="rateBusiness" min="0" max="100"
+                                                                        readonly></input>
+                                                                    <span class="input-group-text">%</span>
+                                                                </div>
+                                                                <span th:errors="*{rateBusiness}"
+                                                                    class="text-danger"></span>
+                                                            </div>
+                                                            <div class="col">
+                                                                <label class="form-label"
+                                                                    for="rateStudy">学習目標達成率</label>
+                                                                <p class="mb-1"></p>
+                                                                <div class="input-group">
+                                                                    <input class="form-control" type="number"
+                                                                        th:field="*{rateStudy}" th:errorclass="err"
+                                                                        id="rateStudy" min="0" max="100"
+                                                                        readonly></input>
+                                                                    <span class="input-group-text">%</span>
+                                                                </div>
+                                                                <span th:errors="*{rateStudy}"
+                                                                    class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="trendBusiness">業務量推移</label>
+                                    <p class="mb-1"></p>
+                                    <div class="col-md-1">
+                                        <input class="form-control" type="number" th:field="*{trendBusiness}"
+                                            th:errorclass="err" id="trendBusiness" min="0" max="100" readonly></input>
+                                        <span th:errors="*{trendBusiness}" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="contentMember">その他メンバー関連内容</label>
+                                    <p class="mb-1"></p>
+                                    <div class="col">
+                                        <textarea class="form-control" type="text" th:field="*{contentMember}"
+                                            th:errorclass="err" id="contentMember" rows="5" readonly></textarea>
+                                        <span th:errors="*{contentMember}" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="contentCustomer">お客様情報</label>
+                                    <p class="mb-1"></p>
+                                    <div class="col">
+                                        <textarea class="form-control" type="text" th:field="*{contentCustomer}"
+                                            th:errorclass="err" id="contentCustomer" rows="5" readonly></textarea>
+                                        <span th:errors="*{contentCustomer}" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="contentProblem">作業における問題点と解決策</label>
+                                    <p class="mb-1"></p>
+                                    <div class="col">
+                                        <textarea class="form-control" type="text" th:field="*{contentProblem}"
+                                            th:errorclass="err" id="contentProblem" rows="5" readonly></textarea>
+                                        <span th:errors="*{contentProblem}" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="card">
+                            <div class="card-header">
+                                目標
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            当月の目標に対する自己評価（前月の目標に対し）
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="mb-3">
+                                                            <label class="form-label"
+                                                                for="evaluationBusiness">業務目標</label>
+                                                            <p class="mb-1"></p>
+                                                            <div class="col">
+                                                                <textarea class="form-control" type="text"
+                                                                    th:field="*{evaluationBusiness}" th:errorclass="err"
+                                                                    id="evaluationBusiness" rows="5"
+                                                                    readonly></textarea>
+                                                                <span th:errors="*{evaluationBusiness}"
+                                                                    class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="evaluationStudy">学習目標</label>
+                                                            <p class="mb-1"></p>
+                                                            <div class="col">
+                                                                <textarea class="form-control" type="text"
+                                                                    th:field="*{evaluationBusiness}" th:errorclass="err"
+                                                                    id="evaluationStudy" rows="5" readonly></textarea>
+                                                                <span th:errors="*{evaluationStudy}"
+                                                                    class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            来月目標
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="goalBusiness">業務目標</label>
+                                                            <p class="mb-1"></p>
+                                                            <div class="col">
+                                                                <textarea class="form-control" type="text"
+                                                                    th:field="*{goalBusiness}" th:errorclass="err"
+                                                                    id="goalBusiness" rows="5" readonly></textarea>
+                                                                <span th:errors="*{goalBusiness}"
+                                                                    class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="goalStudy">学習目標</label>
+                                                            <p class="mb-1"></p>
+                                                            <div class="col">
+                                                                <textarea class="form-control" type="text"
+                                                                    th:field="*{goalStudy}" th:errorclass="err"
+                                                                    id="goalStudy" rows="5" readonly></textarea>
+                                                                <span th:errors="*{goalStudy}"
+                                                                    class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            会社関係
+                        </div>
+                        <div class="card-body">
+                            <div class="col">
+                                <textarea class="form-control" type="text" th:field="*{contentCompany}"
+                                    th:errorclass="err" id="contentCompany" rows="3" readonly></textarea>
+                                <span th:errors="*{contentCompany}" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <div class="card">
+                        <div class="card-header">
+                            その他
+                        </div>
+                        <div class="card-body">
+                            <div class="col">
+                                <textarea class="form-control" type="text" th:field="*{contentOthers}"
+                                    th:errorclass="err" id="contentOthers" rows="5" readonly></textarea>
+                                <span th:errors="*{contentOthers}" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+</body>
+
+</html>
