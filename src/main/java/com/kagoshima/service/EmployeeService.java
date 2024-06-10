@@ -69,6 +69,11 @@ public class EmployeeService {
             }
         }
 
+        // プロフィールから更新時、roleがnullになる件に対応
+        if(employee.getRole() == null) {
+            employee.setRole(findByCode(employee.getCode()).getRole());
+        }
+
         LocalDateTime now = LocalDateTime.now();
         employee.setCreatedAt(findByCode(employee.getCode()).getCreatedAt());
         employee.setUpdatedAt(now);
