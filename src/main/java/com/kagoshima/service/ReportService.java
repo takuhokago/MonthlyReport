@@ -126,6 +126,18 @@ public class ReportService {
     }
 
 
+    // コメント追加
+    @Transactional
+    public void comment(String id, String comment) {
+
+        Report report= findById(id);
+        report.setComment(comment);
+
+
+
+    }
+
+
 
 
 

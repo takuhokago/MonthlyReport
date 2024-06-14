@@ -130,11 +130,22 @@ public class ReportController {
 
     }
 
+
     // 従業員削除処理
     @PostMapping(value = "/{id}/delete")
     public String delete(@PathVariable String id,  Model model) {
 
         reportService.delete(id);
+
+        return "redirect:/reports";
+    }
+
+    // コメント追加
+    @PostMapping(value = "/comment")
+    public String comment(Report report,  Model model) {
+        String id = report.getId().toString();
+        String comment = report.getComment();
+        reportService.comment(id, comment);
 
         return "redirect:/reports";
     }

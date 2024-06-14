@@ -57,32 +57,37 @@ public class Report {
 
     // 勤務時間
     @Column(nullable = false)
-    @Max(999)
+    @Max(200)
     @Min(0)
+    @NotNull
     private Integer timeWorked;
 
     // 残業時間
     @Column(nullable = false)
-    @Max(999)
+    @Max(200)
     @Min(0)
+    @NotNull
     private Integer timeOver;
 
     // 業務目標達成率
     @Column(nullable = false)
     @Max(999)
     @Min(0)
+    @NotNull
     private Integer rateBusiness;
 
     // 学習目標達成率
     @Column(nullable = false)
     @Max(999)
     @Min(0)
+    @NotNull
     private Integer rateStudy;
 
     // 業務量推移
     @Column(nullable = false)
     @Max(999)
     @Min(0)
+    @NotNull
     private Integer trendBusiness;
 
     // その他メンバー関連内容
@@ -138,6 +143,11 @@ public class Report {
     @Column(columnDefinition = "TINYINT", nullable = false)
     private boolean completeFlg;
 
+    // コメント
+    @Column(columnDefinition = "LONGTEXT")
+    @Length(max = 500)
+    private String comment;
+
     // コンストラクタで初期値設定
     Report() {
         reportDate = LocalDate.now();
@@ -157,6 +167,7 @@ public class Report {
         contentCompany = "";
         contentOthers = "";
         completeFlg = false;
+        comment = "";
     }
 
 }
