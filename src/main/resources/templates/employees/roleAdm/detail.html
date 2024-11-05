@@ -6,8 +6,8 @@
 <body class="h-100 overflow-auto">
     <div class="row h-100">
         <div class=" text-white col-sm-2">
-            <div class="position-fixed h-100 bg-dark" style="width: 15%;">
-                <div class="m-3">
+            <div class="position-fixed h-100 bg-dark">
+                <div class="m-4">
                     <nav th:replace="common/side :: copy"></nav>
                 </div>
             </div>
@@ -20,7 +20,7 @@
 
             <div class="row mb-3 g-1">
                 <div class="col-auto">
-                    <a th:href="@{/employees/update/{code}/(code=${employee.code})}" class="btn btn-success">
+                    <a th:href="@{/employees/update/{code}/(code=${employee.code})}" class="btn btn-secondary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor"
                             class="bi bi-pencil" viewBox="0 0 16 16">
                             <path
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="col-auto">
-                    <a th:href="@{/employees}" class="btn btn-primary">
+                    <a th:href="@{/employees}" class="btn btn-light">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor"
                             class="bi bi-arrow-return-left" viewBox="1 0 16 17">
                             <path fill-rule="evenodd"
@@ -80,9 +80,9 @@
             </div>
             <span th:if="${deleteError} neq null" th:text="${deleteError}" class="text-danger"></span>
 
-            <div class="mb-3 col-12 col-xxl-6">
+            <div class="mb-3 col-12 col-xxl-11">
 
-                <div class="col-xl-12">
+                <div class="col-xl-11">
                     <div class="card">
                         <div class="card-body mb-5">
 

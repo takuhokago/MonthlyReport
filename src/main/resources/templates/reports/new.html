@@ -6,8 +6,8 @@
 <body class="h-100 overflow-auto">
     <div class="row h-100">
         <div class=" text-white col-sm-2">
-            <div class="position-fixed h-100 bg-dark" style="width: 15%;">
-                <div class="m-3">
+            <div class="position-fixed h-100 bg-dark">
+                <div class="m-4">
                     <nav th:replace="common/side :: copy"></nav>
                 </div>
             </div>
@@ -20,7 +20,7 @@
             </div>
 
             <div class="mb-3">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#returnModal"
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#returnModal"
                     id="myButton">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor"
                         class="bi bi-arrow-return-left" viewBox="1 0 16 17">
@@ -58,9 +58,9 @@
 
             </div>
 
-            <div class="col-12 col-xxl-6">
+            <div class="col-12 col-xxl-11">
 
-                <div class="col-xl-12">
+                <div class="col-xl-11 pb-5">
                     <div class="card">
                         <div class="card-body">
                             <form th:action="@{/reports/add}" th:object="${report}" th:method="post">
@@ -523,7 +523,7 @@
                         </div>
 
                         <p class="mx-3 mb-3">
-                            <input type="submit" value="登録" class="btn btn-primary">
+                            <input type="submit" value="登録" class="btn btn-secondary">
                         </p>
                         </form>
                     </div>
