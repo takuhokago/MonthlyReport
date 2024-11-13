@@ -1,9 +1,13 @@
 package com.kagoshima.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.sql.init.DatabaseInitializationSettings;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,10 +56,15 @@ public class ReportController {
             }
         }
 
+        TreeSet<LocalDate> dateSet = new TreeSet<>();
+        for(Report rep : reportList) {
+            dateSet.add(rep.getReportDate());
+        }
 
 
         model.addAttribute("listSize", reportList.size());
         model.addAttribute("reportList", reportList);
+        model.addAttribute("dateSet", dateSet);
 
         return "reports/list";
     }
