@@ -37,8 +37,21 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <div class="mb-1">
-                                    <input type="text" class="form-control" id="searchInput" placeholder="キーワードで検索">
+                                <div class="mb-3">
+                                    <div class="row">
+                                        <div class="col-4 col-xl-4">
+                                            <select class="form-select" aria-label="Default select example" id="selectDate">
+                                                <option value="-1" selected>--表示月を選択--</option>
+                                                <option th:each="item : ${dateSet}" th:value="${item}"
+                                                    th:text="${#temporals.format(item, 'yyyy/MM')}"></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-4 col-xl-4">
+                                            <input type="text" class="form-control" id="searchInput"
+                                                placeholder="キーワードで検索">
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <table id="myTable" class="table table-striped table-hover w-100">
@@ -84,15 +97,16 @@
                                                         d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2z" />
                                                 </svg>
 
-                                                <svg th:if="${#strings.isEmpty(report.comment)}" xmlns="http://www.w3.org/2000/svg"
-                                                    width="22" height="16" fill="currentColor" class="bi bi-dash-lg"
-                                                    viewBox="-7 0 16 16">
+                                                <svg th:if="${#strings.isEmpty(report.comment)}"
+                                                    xmlns="http://www.w3.org/2000/svg" width="22" height="16"
+                                                    fill="currentColor" class="bi bi-dash-lg" viewBox="-7 0 16 16">
                                                     <path fill-rule="evenodd"
                                                         d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z" />
 
                                             </td>
                                             <td class="align-middle">
-                                                <a th:href="@{/reports/{id}/(id=${report.id})}" class="btn btn-secondary">
+                                                <a th:href="@{/reports/{id}/(id=${report.id})}"
+                                                    class="btn btn-secondary">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-file-earmark-text"
                                                         viewBox="1 0 16 16">
@@ -110,7 +124,7 @@
 
                             </div>
                         </div>
-                        <p class="mb-3" th:text="'（ 全' + ${listSize} + '件 ）'">
+                        <p id="listSize" class="mb-3" th:text="'（ 全' + ${listSize} + '件 ）'"></p>
                     </div>
                 </div>
 
@@ -120,6 +134,7 @@
 
     </div>
     <script type="text/javascript" src="/js/searchTable.js"></script>
+    <script type="text/javascript" src="/js/reportsListByMonth.js"></script>
     <script>
 
 
