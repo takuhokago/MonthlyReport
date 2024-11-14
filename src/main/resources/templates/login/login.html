@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="common/header :: head_fragment(title=ログイン)"></head>
+<head xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<title th:text="ログイン"></title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<script defer th:src="@{/js/bootstrap.min.js}"></script>
+<meta name="viewport" content="width=device-width">
+</head>
 
 <body>
     <div class="main justify-content-center ">
