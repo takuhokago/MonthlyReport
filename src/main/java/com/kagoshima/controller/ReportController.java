@@ -156,7 +156,7 @@ public class ReportController {
     }
 
 
-    // 従業員削除処理
+    // 月報削除処理
     @PostMapping(value = "/{id}/delete")
     public String delete(@PathVariable String id,  Model model) {
 
