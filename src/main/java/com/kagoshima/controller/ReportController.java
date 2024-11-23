@@ -2,6 +2,8 @@ package com.kagoshima.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.TreeSet;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kagoshima.constants.ErrorKinds;
 import com.kagoshima.constants.ErrorMessage;
@@ -56,24 +59,37 @@ public class ReportController {
             }
         }
 
+        // 表示月選択用
         TreeSet<LocalDate> dateSet = new TreeSet<>();
         for(Report rep : reportList) {
             dateSet.add(rep.getReportDate());
         }
 
+        // 直近の報告書引き継ぎ用
+        boolean isPastCheck = reportService.findByEmployee(userDetail.getEmployee()).size() > 0;
 
         model.addAttribute("listSize", reportList.size());
         model.addAttribute("reportList", reportList);
         model.addAttribute("dateSet", dateSet);
+        model.addAttribute("isPastCheck", isPastCheck);
 
         return "reports/list";
     }
 
     // 月報新規登録画面
-    @GetMapping(value = "/add")
-    public String create(@ModelAttribute Report report, @AuthenticationPrincipal UserDetail userDetail, Model model) {
+    @PostMapping(value = "/create")
+    public String create(@ModelAttribute Report report, @AuthenticationPrincipal UserDetail userDetail, Model model, @RequestParam(name="pastCheck", required = false) String pastCheck) {
         model.addAttribute("fullName", userDetail.getEmployee().getFullName());
         model.addAttribute("affiliation", userDetail.getEmployee().getAffiliation());
+
+        if(pastCheck != null ) {
+            List<Report> reports = reportService.findByEmployee(userDetail.getEmployee());
+            if(reports.size() > 0) {
+                Collections.sort(reports, Comparator.comparing(Report::getReportDate));
+                Report rep = reports.get(reports.size() - 1);
+                model.addAttribute("report", rep);
+            }
+        }
 
         return "reports/new";
     }
@@ -84,7 +100,7 @@ public class ReportController {
 
         // 入力チェック
         if (res.hasErrors()) {
-            return create(report, userDetail, model);
+            return create(report, userDetail, model, null);
         }
 
         ErrorKinds result = reportService.save(report, userDetail);
@@ -92,7 +108,7 @@ public class ReportController {
         if (ErrorMessage.contains(result)) {
             model.addAttribute(ErrorMessage.getErrorName(ErrorKinds.DATECHECK_ERROR),
                     ErrorMessage.getErrorValue(ErrorKinds.DATECHECK_ERROR));
-            return create(report, userDetail, model);
+            return create(report, userDetail, model, null);
         }
 
         return "redirect:/reports";

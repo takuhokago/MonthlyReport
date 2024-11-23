@@ -25,7 +25,7 @@ public class ReportService {
         this.reportRepository = reportRepository;
     }
 
- // 従業員一覧表示処理
+    // 月報一覧表示処理
     public List<Report> findAll() {
         return reportRepository.findAll();
     }
@@ -136,9 +136,6 @@ public class ReportService {
 
 
     }
-
-
-
 
 
 }
