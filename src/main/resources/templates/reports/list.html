@@ -80,7 +80,8 @@
                                                 th:text="${report.employee.lastName} + ' ' + ${report.employee.firstName}">
                                             </td>
                                             <td class="align-middle"
-                                                th:text="${#temporals.format(report.reportDate, 'yyyy/MM')}"></td>
+                                                th:text="${#temporals.format(report.reportMonth, 'yyyy/MM')}">
+                                            </td>
                                             <td class="align-middle" th:text="${report.employee.Affiliation.getValue}">
                                             </td>
                                             <td>

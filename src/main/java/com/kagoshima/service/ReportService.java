@@ -108,7 +108,7 @@ public class ReportService {
 
         if(reports != null) {
             for(Report rep : reports) {
-                if(rep.getReportDate().getMonth().equals(report.getReportDate().getMonth())) {
+                if(rep.getReportMonth().equals(report.getReportMonth())) {
                     // TODO
                     if(report.getId() != null) {
                         if(report.getId().equals(rep.getId())) {

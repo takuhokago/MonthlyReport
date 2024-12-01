@@ -3,12 +3,14 @@ package com.kagoshima.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 
 import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,11 +34,12 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // 日付
+    // 月報年月
     @Column(nullable = false)
     @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate reportDate;
+    @DateTimeFormat(pattern = "yyyy-MM")
+    @Convert(converter = YearMonthAttributeConverter.class)
+    private YearMonth reportMonth;
 
     // 削除フラグ(論理削除を行うため)
     @Column(columnDefinition = "TINYINT", nullable = false)
@@ -150,7 +153,7 @@ public class Report {
 
     // コンストラクタで初期値設定
     Report() {
-        reportDate = LocalDate.now();
+        reportMonth = YearMonth.now();
         contentBusiness = "";
         timeWorked = 0;
         timeOver = 0;

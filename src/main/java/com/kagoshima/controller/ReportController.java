@@ -1,6 +1,7 @@
 package com.kagoshima.controller;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -60,9 +61,9 @@ public class ReportController {
         }
 
         // 表示月選択用
-        TreeSet<LocalDate> dateSet = new TreeSet<>();
+        TreeSet<YearMonth> dateSet = new TreeSet<>();
         for(Report rep : reportList) {
-            dateSet.add(rep.getReportDate());
+            dateSet.add(rep.getReportMonth());
         }
 
         // 直近の報告書引き継ぎ用
@@ -83,9 +84,10 @@ public class ReportController {
         model.addAttribute("affiliation", userDetail.getEmployee().getAffiliation());
 
         if(pastCheck != null ) {
+            // 直近の報告書を引き継ぐ場合
             List<Report> reports = reportService.findByEmployee(userDetail.getEmployee());
             if(reports.size() > 0) {
-                Collections.sort(reports, Comparator.comparing(Report::getReportDate));
+                Collections.sort(reports, Comparator.comparing(Report::getReportMonth));
                 Report rep = reports.get(reports.size() - 1);
                 model.addAttribute("report", rep);
             }
