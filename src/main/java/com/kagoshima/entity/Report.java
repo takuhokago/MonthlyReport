@@ -151,6 +151,10 @@ public class Report {
     @Length(max = 500)
     private String comment;
 
+    // 提出期日
+    @Column(nullable = false)
+    private LocalDate reportDeadline;
+
     // コンストラクタで初期値設定
     Report() {
         reportMonth = YearMonth.now();

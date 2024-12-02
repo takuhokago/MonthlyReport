@@ -55,6 +55,8 @@ public class ReportService {
         report.setCreatedAt(now);
         report.setUpdatedAt(now);
 
+        report.setReportDeadline(report.getReportMonth().atEndOfMonth());
+
         // 月重複チェック
         ErrorKinds result = reportDateCheck(report, employee);
         if (ErrorKinds.CHECK_OK != result) {
@@ -86,6 +88,8 @@ public class ReportService {
         LocalDateTime now = LocalDateTime.now();
         report.setCreatedAt(findById(report.getId().toString()).getCreatedAt());
         report.setUpdatedAt(now);
+
+        report.setReportDeadline(report.getReportMonth().atEndOfMonth());
 
         reportRepository.save(report);
         return ErrorKinds.SUCCESS;

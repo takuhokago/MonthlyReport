@@ -176,6 +176,7 @@
                                         <tr>
                                             <th>氏名</th>
                                             <th>日付</th>
+                                            <th>提出期日</th>
                                             <th>所属</th>
                                             <th>完了</th>
                                             <th>コメント</th>
@@ -189,6 +190,9 @@
                                             </td>
                                             <td class="align-middle"
                                                 th:text="${#temporals.format(report.reportMonth, 'yyyy/MM')}">
+                                            </td>
+                                            <td class="align-middle"
+                                                th:text="${#temporals.format(report.reportDeadline, 'yyyy/MM/dd')}">
                                             </td>
                                             <td class="align-middle" th:text="${report.employee.Affiliation.getValue}">
                                             </td>

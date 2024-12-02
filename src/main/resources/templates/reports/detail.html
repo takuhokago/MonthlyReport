@@ -147,6 +147,11 @@
                                 </td>
                             </tr>
                             <tr>
+                                <th>提出期日</th>
+                                <td class="align-middle" th:text="${#temporals.format(report.reportDeadline, 'yyyy/MM/dd')}">
+                                </td>
+                            </tr>
+                            <tr>
                                 <th>氏名</th>
                                 <td class="align-middle"
                                     th:text="${report.employee.lastName} + ' ' + ${report.employee.firstName}">
