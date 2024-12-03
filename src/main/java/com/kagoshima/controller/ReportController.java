@@ -142,6 +142,11 @@ public class ReportController {
     @PostMapping(value = "/update")
     public String update(@Validated Report report, BindingResult res, Model model) {
 
+        // Report内のEmployeeの情報がnullになっているのでここで設定しなおす
+        if(report.getEmployee() != null && report.getEmployee().getCode() != null) {
+            report.setEmployee(employeeService.findByCode(report.getEmployee().getCode()));
+        }
+
         // 入力チェック
         if (res.hasErrors()) {
             return edit(report.getId().toString(), model, report);
