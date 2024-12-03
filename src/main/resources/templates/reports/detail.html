@@ -162,8 +162,8 @@
                                 <td class="align-middle" th:text="${report.employee.Affiliation.getValue}"></td>
                             </tr>
                             <tr>
-                                <th>登録日時</th>
-                                <td class="align-middle" th:text="${#temporals.format(report.createdAt, 'yyyy-MM-dd')}">
+                                <th>提出日</th>
+                                <td class="align-middle" th:text="${#temporals.format(report.submittedAt, 'yyyy-MM-dd')}">
                                 </td>
                             </tr>
                             <tr>

@@ -127,7 +127,7 @@ public class ReportController {
     // 月報更新画面
     @GetMapping(value = "/update/{id}/")
     public String edit(@PathVariable String id, Model model, Report report) {
-        if(report.getCreatedAt()==null) {
+        if(report.getEmployee() == null) {
             // 更新画面を最初に開くときはこっち
             model.addAttribute("report", reportService.findById(id));
         } else {

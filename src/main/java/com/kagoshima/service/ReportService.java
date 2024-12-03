@@ -52,8 +52,13 @@ public class ReportService {
         Employee employee = userDetail.getEmployee();
 
         LocalDateTime now = LocalDateTime.now();
-        report.setCreatedAt(now);
         report.setUpdatedAt(now);
+
+        if(report.isCompleteFlg()) {
+            report.setSubmittedAt(now);
+        } else {
+            report.setSubmittedAt(null);
+        }
 
         report.setReportDeadline(report.getReportMonth().atEndOfMonth());
 
@@ -86,8 +91,13 @@ public class ReportService {
         }
 
         LocalDateTime now = LocalDateTime.now();
-        report.setCreatedAt(findById(report.getId().toString()).getCreatedAt());
         report.setUpdatedAt(now);
+
+        if(report.isCompleteFlg()) {
+            report.setSubmittedAt(findById(report.getId().toString()).getSubmittedAt());
+        } else {
+            report.setSubmittedAt(null);
+        }
 
         report.setReportDeadline(report.getReportMonth().atEndOfMonth());
 

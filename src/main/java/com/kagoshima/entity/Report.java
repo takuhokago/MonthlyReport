@@ -45,9 +45,9 @@ public class Report {
     @Column(columnDefinition = "TINYINT", nullable = false)
     private boolean deleteFlg;
 
-    // 登録日時
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
+    // 提出日時
+    @Column
+    private LocalDateTime submittedAt;
 
     // 更新日時
     @Column(nullable = false)
@@ -158,6 +158,7 @@ public class Report {
     // コンストラクタで初期値設定
     Report() {
         reportMonth = YearMonth.now();
+        updatedAt = LocalDateTime.now();
         contentBusiness = "";
         timeWorked = 0;
         timeOver = 0;
