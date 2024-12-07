@@ -1,0 +1,179 @@
+/* 作成ボタン */
+.btn-create-custom {
+    background-color: rgba(0, 123, 255, 0.1);
+    color: rgba(0, 123, 255, 0.8);
+    border: 1px solid rgba(0, 123, 255, 0.5);
+    font-weight: bold;
+    }
+
+.btn-create-custom:hover,
+.btn-create-custom:focus {
+    background-color: rgba(0, 123, 255, 0.4)!important;
+    color: rgba(0, 123, 255, 1) !important;
+    border: 1px solid rgba(0, 123, 255, 0.7) !important;
+    }
+
+.btn-create-custom:active {
+    background-color: rgba(0, 123, 255, 0.6)!important;
+    color: rgba(0, 123, 255, 1) !important;
+    border: 1px solid rgba(0, 123, 255, 0.9) !important;
+    }
+
+/* 詳細ボタン */
+.btn-detail-custom {
+    background-color: rgba(0, 200, 100, 0.1);
+    color: rgba(0, 200, 100, 0.8);
+    border: 1px solid rgba(0, 200, 100, 0.5);
+    font-weight: bold;
+    }
+
+.btn-detail-custom:hover,
+.btn-detail-custom:focus {
+    background-color: rgba(0, 200, 100, 0.4) !important;
+    color: rgba(0, 200, 100, 1.0) !important;
+    border: 1px solid rgba(0, 200, 100, 0.7) !important;
+    }
+
+.btn-detail-custom:active {
+    background-color: rgba(0, 200, 100, 0.6) !important;
+    color: rgba(0, 200, 100, 1.0) !important;
+    border: 1px solid rgba(0, 200, 100, 0.9) !important;
+    }
+
+/* 戻るボタン */
+.btn-return-custom {
+    background-color: rgba(211, 211, 211, 0.1);
+    color: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(181, 181, 181, 0.5);
+    font-weight: bold;
+    }
+
+.btn-return-custom:hover,
+.btn-return-custom:focus {
+    background-color: rgba(180, 180, 180, 0.6);
+    color: rgba(0, 0, 0, 1);
+    border: 1px solid rgba(181, 181, 181, 0.7);
+    font-weight: bold;
+    }
+
+.btn-return-custom:active {
+    background-color: rgba(150, 150, 150, 0.8) !important;
+    color: rgba(0, 0, 0, 1) !important;
+    border: 1px solid rgba(181, 181, 181, 0.7) !important;
+    font-weight: bold;
+    }
+
+/* 編集ボタン */
+.btn-edit-custom {
+    background-color: rgba(255, 165, 0, 0.1);
+    color: rgba(225, 135, 0, 0.8);
+    border: 1px solid rgba(255, 165, 0, 0.5);
+    font-weight: bold;
+    }
+
+.btn-edit-custom:hover,
+.btn-edit-custom:focus {
+    background-color: rgba(255, 165, 0, 0.4);
+    color: rgba(225, 135, 0, 1);
+    border: 1px solid rgba(255, 165, 0, 0.7);
+    font-weight: bold;
+    }
+
+.btn-edit-custom:active {
+    background-color: rgba(255, 165, 0, 0.6) !important;
+    color: rgba(225, 135, 0, 1) !important;
+    border: 1px solid rgba(255, 165, 0, 0.7) !important;
+    font-weight: bold;
+    }
+
+/* 削除ボタン */
+.btn-delete-custom {
+    background-color: rgba(255, 99, 71, 0.1);
+    color: rgba(255, 99, 71, 0.8);
+    border: 1px solid rgba(255, 99, 71, 0.5);
+    font-weight: bold;
+    }
+
+.btn-delete-custom:hover,
+.btn-delete-custom:focus {
+    background-color: rgba(255, 99, 71, 0.4);
+    color: rgba(255, 99, 71, 1);
+    border: 1px solid rgba(255, 99, 71, 0.7);
+    font-weight: bold;
+    }
+
+.btn-delete-custom:active {
+    background-color: rgba(255, 99, 71, 0.6) !important;
+    color: rgba(255, 99, 71, 1) !important;
+    border: 1px solid rgba(255, 99, 71, 0.7) !important;
+    font-weight: bold;
+    }
+
+/* コメント追加ボタン */
+.btn-comment-custom {
+    background-color: rgba(173, 216, 230, 0.2);
+    color: rgba(83, 126, 140, 0.8);
+    border: 1px solid rgba(153, 196, 210, 0.5);
+    font-weight: bold;
+    }
+
+.btn-comment-custom:hover,
+.btn-comment-custom:focus {
+    background-color: rgba(143, 186, 200, 0.5);
+    color: rgba(83, 126, 140, 1);
+    border: 1px solid rgba(153, 196, 210, 0.7);
+    font-weight: bold;
+    }
+
+.btn-comment-custom:active {
+    background-color: rgba(173, 216, 230, 0.7) !important;
+    color: rgba(83, 126, 140, 1) !important;
+    border: 1px solid rgba(153, 196, 210, 0.9) !important;
+    font-weight: bold;
+    }
+
+/* Closeボタン */
+.btn-close-custom {
+    background-color: rgba(71, 71, 71, 0.1);
+    color: rgba(40, 40, 40, 0.6);
+    border: 1px solid rgba(181, 181, 181, 0.5);
+    font-weight: bold;
+    }
+
+.btn-close-custom:hover,
+.btn-close-custom:focus {
+    background-color: rgba(71, 71, 71, 0.5);
+    color: rgba(0, 0, 0, 1);
+    border: 1px solid rgba(181, 181, 181, 0.7);
+    font-weight: bold;
+    }
+
+.btn-close-custom:active {
+    background-color: rgba(71, 71, 71, 0.8) !important;
+    color: rgba(0, 0, 0, 1) !important;
+    border: 1px solid rgba(181, 181, 181, 0.7) !important;
+    font-weight: bold;
+    }
+
+/* 保存ボタン */
+.btn-save-custom {
+    background-color: rgba(143, 225, 17, 0.2);
+    color: rgba(66, 158, 0, 0.8);
+    border: 1px solid rgba(86, 178, 0, 0.5);
+    font-weight: bold;
+    }
+
+.btn-save-custom:hover,
+.btn-save-custom:focus {
+    background-color: rgba(163, 245, 37, 0.5);
+    color: rgba(86, 178, 0, 1);
+    border: 1px solid rgba(86, 178, 0, 0.7);
+    font-weight: bold;
+    }
+
+.btn-save-custom:active {
+    background-color: rgba(163, 245, 37, 0.8) !important;
+    color: rgba(86, 178, 0, 1) !important;
+    border: 1px solid rgba(86, 178, 0, 0.7) !important;
+    font-weight: bold;
+    }
