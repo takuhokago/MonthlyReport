@@ -174,12 +174,13 @@ public class ReportController {
 
     // コメント追加
     @PostMapping(value = "/comment")
-    public String comment(Report report,  Model model) {
+    public String comment(Report report, @AuthenticationPrincipal UserDetail userDetail,  Model model) {
         String id = report.getId().toString();
         String comment = report.getComment();
         reportService.comment(id, comment);
 
-        return "redirect:/reports";
+        // 詳細画面に戻る
+        return detail(id, userDetail, model);
     }
 
     // 承認/非承認処理

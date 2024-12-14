@@ -48,7 +48,7 @@
                                 <button type="button" class="btn btn-close-custom" data-bs-dismiss="modal">
                                     閉じる
                                 </button>
-                                <a th:href="@{/reports}" class="btn btn-return-custom">
+                                <a th:href="@{/reports/{id}/(id=${report.id})}" class="btn btn-return-custom">
                                     戻る
                                 </a>
                             </div>

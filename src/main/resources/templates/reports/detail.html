@@ -125,8 +125,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-comment-custom" data-bs-toggle="modal"
-                                data-bs-target="#commentModal">
+                            <button type="button" class="btn btn-comment-custom" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                     class="bi bi-chat-dots" viewBox="0 1 16 16">
                                     <path
@@ -137,34 +137,28 @@
                                 コメント追加
                             </button>
 
-                            <!-- Modal -->
                             <form th:action="@{/reports/comment}" th:object="${report}" th:method="post">
-                                <div class="modal fade" id="commentModal" tabindex="-1"
-                                    aria-labelledby="commentModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="commentModalLabel">コメント追加</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="col">
-                                                    <textarea class="form-control" type="text" th:field="*{comment}"
-                                                        th:errorclass="err" id="comment" rows="5"></textarea>
-                                                    <span th:errors="*{comment}" class="text-danger"></span>
-                                                </div>
-                                                <input type="hidden" th:field="*{id}" id="id">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-close-custom"
-                                                    data-bs-dismiss="modal">閉じる</button>
-                                                <input type="submit" value="保存" class="btn btn-save-custom">
-                                            </div>
+                                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                                    aria-labelledby="offcanvasRightLabel">
+                                    <div class="offcanvas-header">
+                                        <h5 class="offcanvas-title" id="offcanvasRightLabel">コメント追加</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="offcanvas-body">
+                                        <div class="col">
+                                            <textarea class="form-control" type="text" th:field="*{comment}"
+                                                th:errorclass="err" id="comment" rows="15"></textarea>
+                                            <span th:errors="*{comment}" class="text-danger"></span>
+                                        </div>
+                                        <input type="hidden" th:field="*{id}" id="id">
+                                        <div class="text-end p-3">
+                                            <input type="submit" value="保存" class="btn btn-save-custom">
                                         </div>
                                     </div>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>
@@ -270,7 +264,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-12 col-sm-12 col-xl-11 col-xxl-10 pb-3">
+                        <div class="col-12 col-sm-12 col-xl-11 col-xxl-9 pb-3">
 
                             <div class="mb-3">
                                 <div class="card">
