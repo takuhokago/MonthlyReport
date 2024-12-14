@@ -94,7 +94,7 @@ public class ReportService {
         report.setUpdatedAt(now);
 
         if(report.isCompleteFlg()) {
-            report.setSubmittedAt(findById(report.getId().toString()).getSubmittedAt());
+            report.setSubmittedAt(now);
         } else {
             report.setSubmittedAt(null);
         }
@@ -147,8 +147,16 @@ public class ReportService {
         Report report= findById(id);
         report.setComment(comment);
 
+    }
 
+    // 承認/非承認処理
+    @Transactional
+    public Report approve(String id, boolean isApprove) {
 
+        Report report= findById(id);
+        report.setApprovalFlg(isApprove);
+
+        return report;
     }
 
 

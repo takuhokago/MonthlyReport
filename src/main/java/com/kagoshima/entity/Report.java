@@ -155,6 +155,10 @@ public class Report {
     @Column(nullable = false)
     private LocalDate reportDeadline;
 
+    // 承認フラグ
+    @Column(columnDefinition = "TINYINT")
+    private Boolean approvalFlg;
+
     // コンストラクタで初期値設定
     Report() {
         reportMonth = YearMonth.now();

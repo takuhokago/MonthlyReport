@@ -1,7 +1,7 @@
 /* 作成ボタン */
 .btn-create-custom {
     background-color: rgba(0, 123, 255, 0.1);
-    color: rgba(0, 123, 255, 0.8);
+    color: rgba(0, 113, 245, 0.8);
     border: 1px solid rgba(0, 123, 255, 0.5);
     font-weight: bold;
     }
@@ -22,7 +22,7 @@
 /* 詳細ボタン */
 .btn-detail-custom {
     background-color: rgba(0, 200, 100, 0.1);
-    color: rgba(0, 200, 100, 0.8);
+    color: rgba(0, 170, 70, 0.8);
     border: 1px solid rgba(0, 200, 100, 0.5);
     font-weight: bold;
     }
@@ -66,8 +66,8 @@
 /* 編集ボタン */
 .btn-edit-custom {
     background-color: rgba(255, 165, 0, 0.1);
-    color: rgba(225, 135, 0, 0.8);
-    border: 1px solid rgba(255, 165, 0, 0.5);
+    color: rgba(195, 105, 0, 0.8);
+    border: 1px solid rgba(215, 125, 0, 0.5);
     font-weight: bold;
     }
 
@@ -89,7 +89,7 @@
 /* 削除ボタン */
 .btn-delete-custom {
     background-color: rgba(255, 99, 71, 0.1);
-    color: rgba(255, 99, 71, 0.8);
+    color: rgba(205, 49, 31, 0.8);
     border: 1px solid rgba(255, 99, 71, 0.5);
     font-weight: bold;
     }
@@ -112,8 +112,8 @@
 /* コメント追加ボタン */
 .btn-comment-custom {
     background-color: rgba(173, 216, 230, 0.2);
-    color: rgba(83, 126, 140, 0.8);
-    border: 1px solid rgba(153, 196, 210, 0.5);
+    color: rgba(33, 76, 90, 0.8);
+    border: 1px solid rgba(113, 156, 170, 0.5);
     font-weight: bold;
     }
 
@@ -157,23 +157,90 @@
 
 /* 保存ボタン */
 .btn-save-custom {
-    background-color: rgba(143, 225, 17, 0.2);
-    color: rgba(66, 158, 0, 0.8);
-    border: 1px solid rgba(86, 178, 0, 0.5);
+    background-color: rgba(255, 255, 0, 0.3); /* 明るい黄色の背景色 */
+    color: rgba(255, 135, 0, 1); /* オレンジ色のテキスト色 */
+    border: 1px solid rgba(255, 165, 0, 0.8); /* オレンジ色のボーダー色 */
     font-weight: bold;
-    }
+}
+
 
 .btn-save-custom:hover,
 .btn-save-custom:focus {
-    background-color: rgba(163, 245, 37, 0.5);
-    color: rgba(86, 178, 0, 1);
-    border: 1px solid rgba(86, 178, 0, 0.7);
+    background-color: rgba(255, 255, 0, 1); /* 明るい黄色の背景色 */
+    color: rgba(255, 135, 0, 1); /* オレンジ色のテキスト色 */
+    border: 1px solid rgba(255, 165, 0, 0.8); /* オレンジ色のボーダー色 */
     font-weight: bold;
     }
 
 .btn-save-custom:active {
-    background-color: rgba(163, 245, 37, 0.8) !important;
-    color: rgba(86, 178, 0, 1) !important;
-    border: 1px solid rgba(86, 178, 0, 0.7) !important;
+    background-color: rgba(255, 255, 0, 1) !important; /* 明るい黄色の背景色 */
+    color: rgba(255, 135, 0, 1) !important; /* オレンジ色のテキスト色 */
+    border: 1px solid rgba(255, 165, 0, 0.8) !important; /* オレンジ色のボーダー色 */
+    font-weight: bold;
+    }
+
+.custom-margin-approve {
+    margin: 1rem;
+    }
+
+/* 承認・否認ボタン_モーダル */
+.btn-approve-custom-modal {
+    background-color: rgba(102, 205, 102, 0.8); /* 少し暗い緑色の背景色 */
+    color: white; /* テキスト色を白に設定 */
+    border: none; /* ボーダーをなしに設定 */
+    border-radius: 50%; /* ボタンを丸くする */
+    padding: 15px 20px; /* ボタンの内側の余白を設定 */
+    font-size: 1rem; /* フォントサイズを設定 */
+    font-weight: bold; /* 文字を太くする */
+    cursor: pointer; /* カーソルをポインターに設定 */
+    transition: background-color 0.3s; /* 背景色の変化にトランジションを追加 */
+    margin-right: 15px;
+    }
+.btn-approve-custom-modal:hover {
+    background-color: rgba(34, 139, 34, 1); /* ホバー時に濃い緑色に変更 */
+    }
+
+.btn-disapprove-custom-modal {
+    background-color: rgba(255, 99, 71, 0.8); /* トマト色の背景色 */
+    color: white; /* テキスト色を白に設定 */
+    border: none; /* ボーダーをなしに設定 */
+    border-radius: 50%; /* ボタンを丸くする */
+    padding: 15px 20px; /* ボタンの内側の余白を設定 */
+    font-size: 1rem; /* フォントサイズを設定 */
+    font-weight: bold; /* 文字を太くする */
+    cursor: pointer; /* カーソルをポインターに設定 */
+    transition: background-color 0.3s; /* 背景色の変化にトランジションを追加 */
+    margin-right: 15px;
+}
+
+.btn-disapprove-custom-modal:hover {
+    background-color: rgba(220, 20, 60, 1); /* ホバー時にクリムゾン色に変更 */
+}
+
+
+.btn-spacing {
+    margin-right: 0.5rem;
+}
+
+/* 承認否認ボタン */
+.btn-approve-custom {
+    background-color: rgba(144, 238, 255, 0.2);
+    color: rgba(34, 139, 180, 0.8);
+    border: 1px solid rgba(50, 205, 220, 0.5);
+    font-weight: bold;
+    }
+
+.btn-approve-custom:hover,
+.btn-approve-custom:focus {
+    background-color: rgba(144, 238, 255, 0.4);
+    color: rgba(34, 139, 180, 1);
+    border: 1px solid rgba(50, 205, 220, 0.7);
+    font-weight: bold;
+    }
+
+.btn-approve-custom:active {
+    background-color: rgba(144, 238, 255, 0.6) !important;
+    color: rgba(34, 139, 180, 1) !important;
+    border: 1px solid rgba(50, 205, 220, 0.9) !important;
     font-weight: bold;
     }

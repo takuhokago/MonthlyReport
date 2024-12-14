@@ -182,4 +182,15 @@ public class ReportController {
         return "redirect:/reports";
     }
 
+    // 承認/非承認処理
+    @PostMapping(value = "/approve")
+    public String approve(Report report, @RequestParam("choice") boolean choice, @AuthenticationPrincipal UserDetail userDetail, Model model) {
+        String id = report.getId().toString();
+        boolean isApprove = choice;
+        Report rep = reportService.approve(id, isApprove);
+
+        // 詳細画面に戻る
+        return detail(rep.getId().toString(), userDetail, model);
+    }
+
 }
