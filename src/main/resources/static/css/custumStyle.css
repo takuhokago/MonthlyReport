@@ -42,9 +42,9 @@
 
 /* 戻るボタン */
 .btn-return-custom {
-    background-color: rgba(211, 211, 211, 0.1);
+    background-color: rgba(241, 241, 241, 0.5);
     color: rgba(0, 0, 0, 0.8);
-    border: 1px solid rgba(181, 181, 181, 0.5);
+    border: 1px solid rgba(171, 171, 171, 1);
     font-weight: bold;
     }
 
@@ -52,14 +52,14 @@
 .btn-return-custom:focus {
     background-color: rgba(180, 180, 180, 0.6);
     color: rgba(0, 0, 0, 1);
-    border: 1px solid rgba(181, 181, 181, 0.7);
+    border: 1px solid rgba(181, 181, 181, 0.8);
     font-weight: bold;
     }
 
 .btn-return-custom:active {
     background-color: rgba(150, 150, 150, 0.8) !important;
     color: rgba(0, 0, 0, 1) !important;
-    border: 1px solid rgba(181, 181, 181, 0.7) !important;
+    border: 1px solid rgba(181, 181, 181, 1) !important;
     font-weight: bold;
     }
 
@@ -113,7 +113,7 @@
 .btn-comment-custom {
     background-color: rgba(173, 216, 230, 0.2);
     color: rgba(33, 76, 90, 0.8);
-    border: 1px solid rgba(113, 156, 170, 0.5);
+    border: 1px solid rgba(113, 156, 170, 0.7);
     font-weight: bold;
     }
 
@@ -157,25 +157,24 @@
 
 /* 保存ボタン */
 .btn-save-custom {
-    background-color: rgba(255, 255, 0, 0.3); /* 明るい黄色の背景色 */
-    color: rgba(255, 135, 0, 1); /* オレンジ色のテキスト色 */
-    border: 1px solid rgba(255, 165, 0, 0.8); /* オレンジ色のボーダー色 */
+    background-color: rgba(255, 255, 0, 0.4); /* 明るい黄色の背景色 */
+    color: rgba(50, 190, 150, 1); /* スチールブルーのテキスト色 */
+    border: 1px solid rgba(50, 190, 150, 0.8); /* スチールブルーのボーダー色 */
     font-weight: bold;
 }
 
-
 .btn-save-custom:hover,
 .btn-save-custom:focus {
-    background-color: rgba(255, 255, 0, 1); /* 明るい黄色の背景色 */
-    color: rgba(255, 135, 0, 1); /* オレンジ色のテキスト色 */
-    border: 1px solid rgba(255, 165, 0, 0.8); /* オレンジ色のボーダー色 */
+    background-color: rgba(205, 205, 0, 1); /* 明るい黄色の背景色 */
+    color: rgba(70, 130, 180, 1); /* スチールブルーのテキスト色 */
+    border: 1px solid rgba(70, 130, 180, 0.8); /* スチールブルーのボーダー色 */
     font-weight: bold;
     }
 
 .btn-save-custom:active {
-    background-color: rgba(255, 255, 0, 1) !important; /* 明るい黄色の背景色 */
-    color: rgba(255, 135, 0, 1) !important; /* オレンジ色のテキスト色 */
-    border: 1px solid rgba(255, 165, 0, 0.8) !important; /* オレンジ色のボーダー色 */
+    background-color: rgba(155, 155, 0, 1) !important; /* 明るい黄色の背景色 */
+    color: rgba(70, 130, 180, 1) !important; /* スチールブルーのテキスト色 */
+    border: 1px solid rgba(70, 130, 180, 0.8) !important; /* スチールブルーのボーダー色 */
     font-weight: bold;
     }
 
@@ -226,21 +225,105 @@
 .btn-approve-custom {
     background-color: rgba(144, 238, 255, 0.2);
     color: rgba(34, 139, 180, 0.8);
-    border: 1px solid rgba(50, 205, 220, 0.5);
+    border: 1px solid rgba(34, 139, 180, 0.8);
     font-weight: bold;
     }
 
 .btn-approve-custom:hover,
 .btn-approve-custom:focus {
-    background-color: rgba(144, 238, 255, 0.4);
-    color: rgba(34, 139, 180, 1);
-    border: 1px solid rgba(50, 205, 220, 0.7);
+    background-color: rgba(144, 238, 255, 0.5);
+    color: rgba(34, 139, 180, 0.8);
+    border: 1px solid rgba(34, 139, 180, 0.8);
     font-weight: bold;
     }
 
 .btn-approve-custom:active {
-    background-color: rgba(144, 238, 255, 0.6) !important;
-    color: rgba(34, 139, 180, 1) !important;
-    border: 1px solid rgba(50, 205, 220, 0.9) !important;
+    background-color: rgba(144, 238, 255, 1) !important;
+    color: rgba(34, 139, 180, 0.8) !important;
+    border: 1px solid rgba(34, 139, 180, 0.8) !important;
     font-weight: bold;
     }
+
+.card-green {
+    background-color: rgba(144, 238, 144, 0.2); /* 薄い緑色の背景色 */
+    color: rgba(34, 139, 34, 0.8); /* 濃い緑色の文字色 */
+    font-weight: bold;
+}
+
+.card-yellow {
+    background-color: rgba(255, 255, 224, 0.3); /* 薄い黄色の背景色 */
+    color: rgba(218, 165, 32, 0.8); /* ゴールデンロッドの文字色 */
+    font-weight: bold;
+}
+
+.card-blue {
+    background-color: rgba(173, 216, 230, 0.3); /* 薄い青色の背景色 */
+    color: rgba(70, 130, 180, 0.8); /* スチールブルーの文字色 */
+    font-weight: bold;
+}
+
+.card-pink {
+    background-color: rgba(255, 182, 193, 0.3); /* 薄いピンク色の背景色 */
+    color: rgba(255, 105, 180, 0.8); /* ホットピンクの文字色 */
+    font-weight: bold;
+}
+
+.card-body-custom {
+    font-weight: bold;
+}
+
+/* ログインボタン */
+.btn-login-custom {
+    background-color: rgba(147, 112, 219, 0.1); /* 薄い紫色の背景色 */
+    color: rgba(138, 43, 226, 0.8); /* ブルーバイオレットのテキスト色 */
+    border: 1px solid rgba(138, 43, 226, 0.8); /* ブルーバイオレットのボーダー色 */
+    font-weight: bold;
+    border-radius: 50px; /* ボタンを丸くする */
+    padding: 10px 90px; /* ボタンを横に長くする */
+}
+
+
+.btn-login-custom:hover,
+.btn-login-custom:focus {
+    background-color: rgba(147, 112, 219, 0.5); /* 薄い紫色の背景色 */
+    color: rgba(138, 43, 226, 1); /* ブルーバイオレットのテキスト色 */
+    border: 1px solid rgba(138, 43, 226, 0.8); /* ブルーバイオレットのボーダー色 */
+    font-weight: bold;
+    }
+
+.btn-login-custom:active {
+    background-color: rgba(147, 112, 219, 0.8) !important; /* 薄い紫色の背景色 */
+    color: rgba(138, 43, 226, 1) !important; /* ブルーバイオレットのテキスト色 */
+    border: 1px solid rgba(138, 43, 226, 0.9) !important; /* ブルーバイオレットのボーダー色 */
+    font-weight: bold;
+    }
+
+/* ログアウトボタン */
+.btn-logout-custom {
+    background-color: rgba(255, 255, 255, 1); /* 薄い紫色の背景色 */
+    color: rgba(138, 43, 226, 0.8); /* ブルーバイオレットのテキスト色 */
+    border: 1px solid rgba(138, 43, 226, 0.8); /* ブルーバイオレットのボーダー色 */
+    font-weight: bold;
+    border-radius: 50px; /* ボタンを丸くする */
+    padding: 10px 30px; /* ボタンを横に長くする */
+}
+
+.btn-logout-custom:hover,
+.btn-logout-custom:focus {
+    background-color: rgba(138, 43, 226, 0.8); /* 薄い紫色の背景色 */
+    color: rgba(255, 255, 255, 0.8); /* ブルーバイオレットのテキスト色 */
+    border: 1px solid rgba(138, 43, 226, 0.8); /* ブルーバイオレットのボーダー色 */
+    font-weight: bold;
+    border-radius: 50px; /* ボタンを丸くする */
+    padding: 10px 30px; /* ボタンを横に長くする */
+    }
+
+.btn-logout-custom:active {
+    background-color: rgba(108, 13, 196, 1) !important; /* 薄い紫色の背景色 */
+    color: rgba(255, 255, 255, 1) !important; /* ブルーバイオレットのテキスト色 */
+    border: 1px solid rgba(138, 43, 226, 1) !important; /* ブルーバイオレットのボーダー色 */
+    font-weight: bold;
+    border-radius: 50px; /* ボタンを丸くする */
+    padding: 10px 30px; /* ボタンを横に長くする */
+    }
+

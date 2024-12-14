@@ -3,19 +3,28 @@
         <span class="text-light p-1">月報管理システム</span>
     </a>
     <ul class="mt-3 mb-5">
-        <li sec:authorize="hasAuthority('ADMIN')">
-            <a class="link-light link-offset-1 link-underline-opacity-25 link-underline-opacity-100-hover" th:href="@{/employees}">従業員</a>
-        </li>
-        <li>
-            <a class="link-light link-offset-1 link-underline-opacity-25 link-underline-opacity-100-hover" th:href="@{/reports}">月報</a>
-        </li>
-        <li>
-            <a class="link-light link-offset-1 link-underline-opacity-25 link-underline-opacity-100-hover" th:href="@{/employees/profile}">プロフィール</a>
-        </li>
+        <div class="mb-1">
+            <li sec:authorize="hasAuthority('ADMIN')">
+                <a class="link-light link-offset-1 link-underline-opacity-25 link-underline-opacity-100-hover"
+                    th:href="@{/employees}">従業員</a>
+            </li>
+        </div>
+        <div class="mb-1">
+            <li>
+                <a class="link-light link-offset-1 link-underline-opacity-25 link-underline-opacity-100-hover"
+                    th:href="@{/reports}">月報</a>
+            </li>
+        </div>
+        <div class="mb-1">
+            <li>
+                <a class="link-light link-offset-1 link-underline-opacity-25 link-underline-opacity-100-hover"
+                    th:href="@{/employees/profile}">プロフィール</a>
+            </li>
+        </div>
     </ul>
     <form method="post" th:action="@{/logout}">
         <div class="p-1">
-            <input type="submit" value="ログアウト" class="btn btn-light">
+            <input type="submit" value="ログアウト" class="btn btn-logout-custom">
         </div>
     </form>
 </nav>

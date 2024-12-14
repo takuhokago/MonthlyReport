@@ -62,7 +62,7 @@
 
                 <div class="col-xl-11 pb-5">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body card-body-custom">
                             <form th:action="@{/reports/add}" th:object="${report}" th:method="post">
                                 <div class="wizard wizard-success mb-4">
 
@@ -106,10 +106,10 @@
 
                                     <div class="mb-3">
                                         <div class="card">
-                                            <div class="card-header">
+                                            <div class="card-header card-green">
                                                 現場関係
                                             </div>
-                                            <div class="card-body">
+                                            <div class="card-body card-body-custom">
 
                                                 <div class="mb-3">
                                                     <label class="form-label" for="contentBusiness">業務環境/開発環境
@@ -127,7 +127,7 @@
                                                     <p class="mb-1"></p>
                                                     <textarea class="form-control" type="text"
                                                         th:field="*{contentBusiness}" th:errorclass="err"
-                                                        id="contentBusiness" rows="5"></textarea>
+                                                        id="contentBusiness" rows="15"></textarea>
                                                     <span th:errors="*{contentBusiness}" class="text-danger"></span>
                                                 </div>
 
@@ -135,10 +135,10 @@
                                                     <div class="row">
                                                         <div class="col-sm-6 mb-3 mb-sm-0">
                                                             <div class="card">
-                                                                <div class="card-header">
+                                                                <div class="card-header  card-blue">
                                                                     時間
                                                                 </div>
-                                                                <div class="card-body">
+                                                                <div class="card-body card-body-custom">
                                                                     <div class="mb-3">
                                                                         <div class="row">
                                                                             <div class="col">
@@ -212,10 +212,10 @@
 
                                                         <div class="col-sm-6">
                                                             <div class="card">
-                                                                <div class="card-header">
+                                                                <div class="card-header card-blue">
                                                                     目標達成率
                                                                 </div>
-                                                                <div class="card-body">
+                                                                <div class="card-body card-body-custom">
                                                                     <div class="mb-3">
                                                                         <div class="row">
                                                                             <div class="col">
@@ -336,7 +336,7 @@
                                                     <div class="col">
                                                         <textarea class="form-control" type="text"
                                                             th:field="*{contentMember}" th:errorclass="err"
-                                                            id="contentMember" rows="5"></textarea>
+                                                            id="contentMember" rows="10"></textarea>
                                                         <span th:errors="*{contentMember}" class="text-danger"></span>
                                                     </div>
                                                 </div>
@@ -378,16 +378,16 @@
 
                                     <div class="mb-3">
                                         <div class="card">
-                                            <div class="card-header">
+                                            <div class="card-header card-green">
                                                 目標
                                             </div>
-                                            <div class="card-body">
+                                            <div class="card-body card-body-custom">
                                                 <div class="mb-3">
                                                     <div class="card">
-                                                        <div class="card-header">
+                                                        <div class="card-header card-blue">
                                                             当月の目標に対する自己評価（前月の目標に対し）
                                                         </div>
-                                                        <div class="card-body">
+                                                        <div class="card-body card-body-custom">
 
                                                             <div class="container">
                                                                 <div class="row">
@@ -433,10 +433,10 @@
 
                                                 <div class="mb-3">
                                                     <div class="card">
-                                                        <div class="card-header">
+                                                        <div class="card-header card-blue">
                                                             来月目標
                                                         </div>
-                                                        <div class="card-body">
+                                                        <div class="card-body card-body-custom">
 
                                                             <div class="container">
                                                                 <div class="row">
@@ -497,7 +497,7 @@
                                     <p class="mb-1"></p>
                                     <div class="col">
                                         <textarea class="form-control" type="text" th:field="*{contentCompany}"
-                                            th:errorclass="err" id="contentCompany" rows="3"></textarea>
+                                            th:errorclass="err" id="contentCompany" rows="5"></textarea>
                                         <span th:errors="*{contentCompany}" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -507,7 +507,7 @@
                                     <p class="mb-1"></p>
                                     <div class="col">
                                         <textarea class="form-control" type="text" th:field="*{contentOthers}"
-                                            th:errorclass="err" id="contentOthers" rows="3"></textarea>
+                                            th:errorclass="err" id="contentOthers" rows="5"></textarea>
                                         <span th:errors="*{contentOthers}" class="text-danger"></span>
                                     </div>
                                 </div>

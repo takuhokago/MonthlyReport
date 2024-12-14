@@ -36,10 +36,10 @@
                 <div class="col-xl-11">
                     <div class="mb-3">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header card-green">
                                 パスワード・所属のみ変更できます
                             </div>
-                            <div class="card-body">
+                            <div class="card-body card-body-custom">
                                 <form th:action="@{/employees/update}" th:object="${employee}" th:method="post">
                                     <div class="wizard wizard-success mb-4">
                                         <div class="mb-3">
@@ -165,7 +165,7 @@
 
                 <div class="col-xl-12 pb-5">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header card-green">
                             <h5 th:text="${employee.lastName} + ' ' + ${employee.firstName} + ' さんの報告書'">
                                 </h4>
                         </div>
