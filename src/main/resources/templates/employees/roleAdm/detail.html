@@ -101,6 +101,11 @@
                                             th:text="${employee.lastName} + ' ' + ${employee.firstName}"></td>
                                     </tr>
                                     <tr>
+                                        <th>メールアドレス</th>
+                                        <td class="align-middle"
+                                            th:text="${employee.email}"></td>
+                                    </tr>
+                                    <tr>
                                         <th>所属</th>
                                         <td class="align-middle" th:text="${employee.affiliation.getValue}"></td>
                                     </tr>

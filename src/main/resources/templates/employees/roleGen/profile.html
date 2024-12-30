@@ -66,6 +66,15 @@
                                                 <span th:errors="*{firstName}" class="text-danger"></span>
                                             </div>
                                         </div>
+
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">メールアドレス</label>
+                                            <p class="mb-1"></p>
+                                            <input class="form-control" type="email" th:field="*{email}"
+                                                th:errorclass="err" id="email" placeholder="name9999@ssk-kan.co.jp">
+                                            <span th:errors="*{email}" class="text-danger"></span>
+                                        </div>
+
                                         <div class="mb-3">
                                             <label class="form-label" for="password">パスワード</label>
                                             <p class="mb-1"></p>
@@ -197,7 +206,7 @@
                                                 th:text="${#temporals.format(report.reportDeadline, 'yyyy/MM/dd')}">
                                             </td>
                                             <td class="align-middle" th:if="${report.submittedAt != null}"
-                                            th:text="${#temporals.format(report.submittedAt, 'yyyy/MM/dd')}">
+                                                th:text="${#temporals.format(report.submittedAt, 'yyyy/MM/dd')}">
                                             </td>
                                             <td class="align-middle" th:if="${report.submittedAt == null}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="22"
@@ -215,9 +224,9 @@
                                                     <path
                                                         d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                                                 </svg>
-                                                <svg th:if="${!report.completeFlg}"
-                                                    xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                                    fill="currentColor" class="bi bi-dash-lg" viewBox="-7 0 16 16">
+                                                <svg th:if="${!report.completeFlg}" xmlns="http://www.w3.org/2000/svg"
+                                                    width="22" height="22" fill="currentColor" class="bi bi-dash-lg"
+                                                    viewBox="-7 0 16 16">
                                                     <path fill-rule="evenodd"
                                                         d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z" />
                                                 </svg>

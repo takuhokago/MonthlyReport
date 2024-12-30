@@ -15,6 +15,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
@@ -39,8 +40,7 @@ public class Employee {
     }
 
     public static enum Affiliation {
-        ICTSK("所属A"),
-        ICTSS("所属B");
+        ICTSK("所属A"), ICTSS("所属B");
 
         private String affiliation;
 
@@ -73,7 +73,7 @@ public class Employee {
     private String firstName;
 
     // 権限
-    @Column(columnDefinition="VARCHAR(10)", nullable = false)
+    @Column(columnDefinition = "VARCHAR(10)", nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -82,7 +82,7 @@ public class Employee {
     private String password;
 
     // 削除フラグ(論理削除を行うため)
-    @Column(columnDefinition="TINYINT", nullable = false)
+    @Column(columnDefinition = "TINYINT", nullable = false)
     private boolean deleteFlg;
 
     // 登録日時
@@ -94,9 +94,16 @@ public class Employee {
     private LocalDateTime updatedAt;
 
     // 所属
-    @Column(columnDefinition="VARCHAR(10)", nullable = false)
+    @Column(columnDefinition = "VARCHAR(10)", nullable = false)
     @Enumerated(EnumType.STRING)
     private Affiliation affiliation;
+
+    // メールアドレス
+    @Column(length = 50, nullable = false)
+    @NotEmpty
+    @Email
+    @Length(max = 50)
+    private String email;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<Report> reportList;
