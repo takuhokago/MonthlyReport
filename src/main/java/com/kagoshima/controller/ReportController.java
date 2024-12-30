@@ -28,6 +28,7 @@ import com.kagoshima.constants.ErrorMessage;
 import com.kagoshima.entity.Report;
 import com.kagoshima.entity.Employee;
 import com.kagoshima.entity.Employee.Role;
+import com.kagoshima.service.EmailService;
 import com.kagoshima.service.EmployeeService;
 import com.kagoshima.service.ReportService;
 import com.kagoshima.service.UserDetail;
@@ -38,11 +39,13 @@ public class ReportController {
 
     private final ReportService reportService;
     private final EmployeeService employeeService;
+    private final EmailService emailService;
 
     @Autowired
-    public ReportController(ReportService reportService, EmployeeService employeeService) {
+    public ReportController(ReportService reportService, EmployeeService employeeService, EmailService emailService) {
         this.reportService = reportService;
         this.employeeService = employeeService;
+        this.emailService = emailService;
     }
 
     // 月報一覧画面
@@ -121,6 +124,12 @@ public class ReportController {
     public String detail(@PathVariable String id, @AuthenticationPrincipal UserDetail userDetail, Model model) {
         model.addAttribute("report", reportService.findById(id));
         model.addAttribute("employee", userDetail.getEmployee());
+
+        String to = "takku1226000@gmail.com";
+        String subject = "件名";
+        String text = "本文";
+        emailService.sendSimpleEmail(to, subject, text);
+
         return "reports/detail";
     }
 
