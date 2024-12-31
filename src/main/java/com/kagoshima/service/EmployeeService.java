@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kagoshima.constants.ErrorKinds;
 import com.kagoshima.entity.Employee;
 import com.kagoshima.entity.Employee.Affiliation;
+import com.kagoshima.entity.Employee.Role;
 import com.kagoshima.entity.Report;
 import com.kagoshima.repository.EmployeeRepository;
 
@@ -124,6 +125,11 @@ public class EmployeeService {
     // Affiliationで検索
     public List<Employee> findByAffiliaton(Affiliation affiliation) {
         return employeeRepository.findByAffiliation(affiliation);
+    }
+
+    // Roleで検索
+    public List<Employee> findByRole(Role role) {
+        return employeeRepository.findByRole(role);
     }
 
     // 従業員パスワードチェック
