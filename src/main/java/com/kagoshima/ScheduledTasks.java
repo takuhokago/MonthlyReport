@@ -32,7 +32,7 @@ public class ScheduledTasks {
         this.messageSource = messageSource;
     }
 
-    @Scheduled(cron = "0 * * * * ?")
+    @Scheduled(cron = "0 0 0 27 * ?")
     public void performTask() {
         ArrayList<Employee> toList = new ArrayList<>();
 
