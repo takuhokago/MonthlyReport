@@ -3,8 +3,10 @@ package com.kagoshima;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -20,20 +22,19 @@ public class ScheduledTasks {
     private final EmailService emailService;
     private final ReportService reportService;
     private final EmployeeService employeeService;
-
-    private String tempSubject = "【月報管理システム】%month%月報告書 リマインド";
-    private String tempText = "%month%月分の報告書が未提出となっております。%month%月中の提出をお願いいたします。\r\n\r\n※このメールは「月報管理システム」からの自動配信メールとなっております。ご返信はお受けできかねますのでご了承ください。";
+    private final MessageSource messageSource;
 
     @Autowired
-    public ScheduledTasks(EmailService emailService, ReportService reportService, EmployeeService employeeService) {
+    public ScheduledTasks(EmailService emailService, ReportService reportService, EmployeeService employeeService, MessageSource messageSource) {
         this.emailService = emailService;
         this.reportService = reportService;
         this.employeeService = employeeService;
+        this.messageSource = messageSource;
     }
 
     @Scheduled(cron = "0 * * * * ?")
     public void performTask() {
-        ArrayList<String> toList = new ArrayList<>();
+        ArrayList<Employee> toList = new ArrayList<>();
 
         List<Employee> generalEmployees = employeeService.findByRole(Employee.Role.GENERAL);
         for (Employee employee : generalEmployees) {
@@ -44,19 +45,19 @@ public class ScheduledTasks {
             }
 
             if(currentReport != null && !checkCurrentReportCompleted(currentReport)) {
-                toList.add(employee.getEmail());
+                toList.add(employee);
             }
         }
         sendEmail(toList);
     }
 
-    private void sendEmail(ArrayList<String> toList) {
+    private void sendEmail(ArrayList<Employee> toList) {
         String month = String.valueOf(YearMonth.now().getMonthValue());
-        String subject = tempSubject.replace("%month%", month);
-        String text = tempText.replace("%month%", month);
+        String subject = messageSource.getMessage("subject.remind", new Object[] {month}, Locale.JAPAN);
 
-        for (String to : toList) {
-            emailService.sendSimpleEmail(to, subject, text);
+        for (Employee emp : toList) {
+        	String body = messageSource.getMessage("body.remind", new Object[] {emp.getFullName(),month}, Locale.JAPAN);
+            emailService.sendSimpleEmail(emp.getEmail(), subject, body);
         }
     }
 
