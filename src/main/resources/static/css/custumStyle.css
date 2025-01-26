@@ -25,7 +25,7 @@
     color: rgba(0, 113, 245, 0.8);
     border: 1px solid rgba(0, 123, 255, 0.5);
     font-weight: bold;
-    width: 350px; /* ボタンの幅を設定 */
+    width: 150px; /* ボタンの幅を設定 */
     margin: 0 auto; display: block;
     }
 
@@ -34,7 +34,7 @@
     background-color: rgba(0, 123, 255, 0.4)!important;
     color: rgba(0, 123, 255, 1) !important;
     border: 1px solid rgba(0, 123, 255, 0.7) !important;
-    width: 350px; /* ボタンの幅を設定 */
+    width: 150px; /* ボタンの幅を設定 */
     margin: 0 auto; display: block;
     }
 
@@ -42,7 +42,7 @@
     background-color: rgba(0, 123, 255, 0.6)!important;
     color: rgba(0, 123, 255, 1) !important;
     border: 1px solid rgba(0, 123, 255, 0.9) !important;
-    width: 350px; /* ボタンの幅を設定 */
+    width: 150px; /* ボタンの幅を設定 */
     margin: 0 auto; display: block;
     }
 
@@ -71,7 +71,7 @@
 
 /* 戻るボタン */
 .btn-return-custom {
-    background-color: rgba(241, 241, 241, 0.5);
+    background-color: rgba(255, 255, 255, 0.7);
     color: rgba(0, 0, 0, 0.8);
     border: 1px solid rgba(171, 171, 171, 1);
     font-weight: bold;
@@ -164,8 +164,8 @@
 /* Closeボタン */
 .btn-close-custom {
     background-color: rgba(71, 71, 71, 0.1);
-    color: rgba(40, 40, 40, 0.6);
-    border: 1px solid rgba(181, 181, 181, 0.5);
+    color: rgba(40, 40, 40, 0.9);
+    border: 1px solid rgba(181, 181, 181, 0.8);
     font-weight: bold;
     }
 
@@ -186,58 +186,59 @@
 
 /* 保存ボタン */
 .btn-save-custom {
-    background-color: rgba(255, 255, 0, 0.4); /* 明るい黄色の背景色 */
-    color: rgba(20, 160, 20, 1); /* スチールブルーのテキスト色 */
-    border: 1px solid rgba(20, 160, 20, 1); /* スチールブルーのボーダー色 */
+    background-color: rgba(255, 165, 0, 0.2); /* 薄いオレンジ色の背景 */
+    color: rgba(255, 69, 0, 1); /* オレンジレッドの文字 */
+    border: 1px solid rgba(255, 69, 0, 1); /* オレンジレッドの枠線 */
     font-weight: bold;
 }
-
 
 .btn-save-custom:hover,
 .btn-save-custom:focus {
-    background-color: rgba(205, 205, 0, 1); /* 明るい黄色の背景色 */
-    color: rgba(20, 160, 20, 1); /* スチールブルーのテキスト色 */
-    border: 1px solid rgba(20, 160, 20, 1); /* スチールブルーのボーダー色 */
+    background-color: rgba(255, 140, 0, 0.7); /* 濃いオレンジ色の背景 */
+    color: rgba(255, 69, 0, 1); /* オレンジレッドの文字 */
+    border: 1px solid rgba(255, 69, 0, 1); /* オレンジレッドの枠線 */
     font-weight: bold;
-    }
+}
 
 .btn-save-custom:active {
-    background-color: rgba(155, 155, 0, 1) !important; /* 明るい黄色の背景色 */
-    color: rgba(20, 160, 20, 1) !important; /* スチールブルーのテキスト色 */
-    border: 1px solid rgba(20, 160, 20, 1) !important; /* スチールブルーのボーダー色 */
+    background-color: rgba(255, 69, 0, 1) !important; /* オレンジレッドの背景 */
+    color: rgba(255, 255, 255, 1) !important; /* 白色の文字 */
+    border: 1px solid rgba(255, 69, 0, 1) !important; /* オレンジレッドの枠線 */
     font-weight: bold;
-    }
-
-/* 保存ボタン大 */
-.btn-save-custom-lg {
-    background-color: rgba(255, 255, 0, 0.4); /* 明るい黄色の背景色 */
-    color: rgba(20, 160, 20, 1); /* スチールブルーのテキスト色 */
-    border: 1px solid rgba(20, 160, 20, 1); /* スチールブルーのボーダー色 */
-    font-weight: bold;
-    width: 350px; /* ボタンの幅を設定 */
-    margin: 0 auto; display: block;
 }
 
 
+/* 保存ボタン大 */
+.btn-save-custom-lg {
+    background-color: rgba(255, 165, 0, 0.2); /* 薄いオレンジ色の背景 */
+    color: rgba(255, 69, 0, 1); /* オレンジレッドの文字 */
+    border: 1px solid rgba(255, 69, 0, 1); /* オレンジレッドの枠線 */
+    font-weight: bold;
+    width: 150px; /* ボタンの幅を設定 */
+    margin: 0 auto; 
+    display: block;
+}
+
 .btn-save-custom-lg:hover,
 .btn-save-custom-lg:focus {
-    background-color: rgba(205, 205, 0, 1); /* 明るい黄色の背景色 */
-    color: rgba(20, 160, 20, 1); /* スチールブルーのテキスト色 */
-    border: 1px solid rgba(20, 160, 20, 1); /* スチールブルーのボーダー色 */
+    background-color: rgba(255, 140, 0, 0.7); /* 濃いオレンジ色の背景 */
+    color: rgba(255, 69, 0, 1); /* オレンジレッドの文字 */
+    border: 1px solid rgba(255, 69, 0, 1); /* オレンジレッドの枠線 */
     font-weight: bold;
-    width: 350px; /* ボタンの幅を設定 */
-    margin: 0 auto; display: block;
-    }
+    width: 150px; /* ボタンの幅を設定 */
+    margin: 0 auto; 
+    display: block;
+}
 
 .btn-save-custom-lg:active {
-    background-color: rgba(155, 155, 0, 1) !important; /* 明るい黄色の背景色 */
-    color: rgba(20, 160, 20, 1) !important; /* スチールブルーのテキスト色 */
-    border: 1px solid rgba(20, 160, 20, 1) !important; /* スチールブルーのボーダー色 */
+    background-color: rgba(255, 69, 0, 1) !important; /* オレンジレッドの背景 */
+    color: rgba(255, 255, 255, 1) !important; /* 白色の文字 */
+    border: 1px solid rgba(255, 69, 0, 1) !important; /* オレンジレッドの枠線 */
     font-weight: bold;
-    width: 350px; /* ボタンの幅を設定 */
-    margin: 0 auto; display: block;
-    }
-
+    width: 150px; /* ボタンの幅を設定 */
+    margin: 0 auto; 
+    display: block;
+}
 
 
 .custom-margin-approve {
@@ -360,35 +361,36 @@
 
 /* ログインボタン */
 .btn-login-custom {
-    background-color: rgba(147, 112, 219, 0.1); /* 薄い紫色の背景色 */
-    color: rgba(138, 43, 226, 0.8); /* ブルーバイオレットのテキスト色 */
-    border: 1px solid rgba(138, 43, 226, 0.8); /* ブルーバイオレットのボーダー色 */
+    background-color: rgba(213, 255, 255, 1); /* 薄い青色の背景色 */
+    color: rgba(0, 0, 139, 0.8); /* ダークブルーのテキスト色 */
+    border: 1px solid rgba(0, 0, 139, 0.8); /* ダークブルーのボーダー色 */
     font-weight: bold;
     border-radius: 50px; /* ボタンを丸くする */
     padding: 10px 90px; /* ボタンを横に長くする */
 }
 
-
 .btn-login-custom:hover,
 .btn-login-custom:focus {
-    background-color: rgba(147, 112, 219, 0.5); /* 薄い紫色の背景色 */
-    color: rgba(138, 43, 226, 1); /* ブルーバイオレットのテキスト色 */
-    border: 1px solid rgba(138, 43, 226, 0.8); /* ブルーバイオレットのボーダー色 */
+    background-color: rgba(135, 206, 250, 0.8); /* スカイブルーの背景色 */
+    color: rgba(255, 255, 255, 0.8); /* 白色のテキスト色 */
+    border: 1px solid rgba(0, 0, 139, 0.8); /* ダークブルーのボーダー色 */
     font-weight: bold;
-    }
+}
 
 .btn-login-custom:active {
-    background-color: rgba(147, 112, 219, 0.8) !important; /* 薄い紫色の背景色 */
-    color: rgba(138, 43, 226, 1) !important; /* ブルーバイオレットのテキスト色 */
-    border: 1px solid rgba(138, 43, 226, 0.9) !important; /* ブルーバイオレットのボーダー色 */
+    background-color: rgba(85, 156, 200, 1) !important; /* ダークブルーの背景色 */
+    color: rgba(255, 255, 255, 1) !important; /* 白色のテキスト色 */
+    border: 1px solid rgba(0, 0, 139, 1) !important; /* ダークブルーのボーダー色 */
     font-weight: bold;
-    }
+}
+
+
 
 /* ログアウトボタン */
 .btn-logout-custom {
-    background-color: rgba(255, 255, 255, 1); /* 薄い紫色の背景色 */
-    color: rgba(138, 43, 226, 0.8); /* ブルーバイオレットのテキスト色 */
-    border: 1px solid rgba(138, 43, 226, 0.8); /* ブルーバイオレットのボーダー色 */
+    background-color: rgba(213, 255, 255, 1); /* 薄い青色の背景色 */
+    color: rgba(0, 0, 139, 0.8); /* ダークブルーのテキスト色 */
+    border: 1px solid rgba(0, 0, 139, 0.8); /* ダークブルーのボーダー色 */
     font-weight: bold;
     border-radius: 50px; /* ボタンを丸くする */
     padding: 10px 30px; /* ボタンを横に長くする */
@@ -396,20 +398,21 @@
 
 .btn-logout-custom:hover,
 .btn-logout-custom:focus {
-    background-color: rgba(238, 143, 255, 0.8); /* 薄い紫色の背景色 */
-    color: rgba(255, 255, 255, 0.8); /* ブルーバイオレットのテキスト色 */
-    border: 1px solid rgba(138, 43, 226, 0.8); /* ブルーバイオレットのボーダー色 */
+    background-color: rgba(135, 206, 250, 0.8); /* スカイブルーの背景色 */
+    color: rgba(255, 255, 255, 0.8); /* 白色のテキスト色 */
+    border: 1px solid rgba(0, 0, 139, 0.8); /* ダークブルーのボーダー色 */
     font-weight: bold;
     border-radius: 50px; /* ボタンを丸くする */
     padding: 10px 30px; /* ボタンを横に長くする */
-    }
+}
 
 .btn-logout-custom:active {
-    background-color: rgba(108, 13, 196, 1) !important; /* 薄い紫色の背景色 */
-    color: rgba(255, 255, 255, 1) !important; /* ブルーバイオレットのテキスト色 */
-    border: 1px solid rgba(138, 43, 226, 1) !important; /* ブルーバイオレットのボーダー色 */
+    background-color: rgba(85, 156, 200, 1) !important; /* ダークブルーの背景色 */
+    color: rgba(255, 255, 255, 1) !important; /* 白色のテキスト色 */
+    border: 1px solid rgba(0, 0, 139, 1) !important; /* ダークブルーのボーダー色 */
     font-weight: bold;
     border-radius: 50px; /* ボタンを丸くする */
     padding: 10px 30px; /* ボタンを横に長くする */
-    }
+}
+
 
