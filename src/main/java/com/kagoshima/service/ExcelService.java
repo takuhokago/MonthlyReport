@@ -1,7 +1,7 @@
 package com.kagoshima.service;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Optional;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
@@ -12,7 +12,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -34,9 +33,10 @@ public class ExcelService {
 	public Workbook createWorkbookWithReport(Report report) throws IOException {
 		// テンプレートファイルの読み込み
 		Resource resource = resourceLoader.getResource("classpath:template_report.xlsx");
-		FileInputStream file = new FileInputStream(resource.getFile());
-		Workbook workbook = new XSSFWorkbook(file);
+		InputStream inputStream = resource.getInputStream();
+		Workbook workbook = new XSSFWorkbook(inputStream);
 
+		
 		// シートの取得
 		Sheet sheet = workbook.getSheetAt(0);
 
