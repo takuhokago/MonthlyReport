@@ -305,7 +305,31 @@
     border: 1px solid rgba(34, 139, 180, 0.8) !important;
     font-weight: bold;
     }
+    
+/* 出力ボタン */
+.btn-export-custom {
+    background-color: rgba(144, 238, 144, 0.2); /* 薄緑色の背景 */
+    color: rgba(34, 139, 34, 0.8); /* 緑色の文字 */
+    border: 1px solid rgba(34, 139, 34, 0.8); /* 緑色の枠線 */
+    font-weight: bold;
+}
 
+.btn-export-custom:hover,
+.btn-export-custom:focus {
+    background-color: rgba(144, 238, 144, 0.5); /* 背景色が濃くなる */
+    color: rgba(34, 139, 34, 0.8); /* 緑色の文字 */
+    border: 1px solid rgba(34, 139, 34, 0.8); /* 緑色の枠線 */
+    font-weight: bold;
+}
+
+.btn-export-custom:active {
+    background-color: rgba(144, 238, 144, 1) !important; /* さらに濃くなる */
+    color: rgba(34, 139, 34, 0.8) !important; /* 緑色の文字 */
+    border: 1px solid rgba(34, 139, 34, 0.8) !important; /* 緑色の枠線 */
+    font-weight: bold;
+}
+
+/* カードたち */
 .card-green {
     background-color: rgba(144, 238, 144, 0.2); /* 薄い緑色の背景色 */
     color: rgba(34, 139, 34, 0.8); /* 濃い緑色の文字色 */

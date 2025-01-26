@@ -1,5 +1,10 @@
 package com.kagoshima.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,7 +12,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
 
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,8 +35,11 @@ import com.kagoshima.entity.Report;
 import com.kagoshima.entity.Employee;
 import com.kagoshima.entity.Employee.Role;
 import com.kagoshima.service.EmployeeService;
+import com.kagoshima.service.ExcelService;
 import com.kagoshima.service.ReportService;
 import com.kagoshima.service.UserDetail;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("reports")
@@ -35,11 +47,13 @@ public class ReportController {
 
     private final ReportService reportService;
     private final EmployeeService employeeService;
+    private final ExcelService excelService;
 
     @Autowired
-    public ReportController(ReportService reportService, EmployeeService employeeService) {
+    public ReportController(ReportService reportService, EmployeeService employeeService, ExcelService excelService) {
         this.reportService = reportService;
         this.employeeService = employeeService;
+        this.excelService = excelService;
     }
 
     // 月報一覧画面
@@ -118,8 +132,37 @@ public class ReportController {
     public String detail(@PathVariable String id, @AuthenticationPrincipal UserDetail userDetail, Model model) {
         model.addAttribute("report", reportService.findById(id));
         model.addAttribute("employee", userDetail.getEmployee());
+        model.addAttribute("reportId", id);
 
         return "reports/detail";
+    }
+    
+    // エクセル出力
+    @PostMapping(value="/export")
+    public void export(@RequestParam("reportId") String reportId, HttpServletResponse response) {
+    	try {
+    		Report report = reportService.findById(reportId);
+			
+			// 書き込み
+			Workbook workbook = excelService.createWorkbookWithReport(report);
+			
+			// レスポンス・ヘッダー設定
+			response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+			response.setHeader("Content-Disposition", "attachment; filename=output.xlsx");
+			
+			// ファイルを書き込んでユーザーにダウンロードさせる
+			OutputStream out = response.getOutputStream();
+			workbook.write(out);
+			out.close();
+			workbook.close();
+			
+		} catch (FileNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
     }
 
     // 月報更新画面
