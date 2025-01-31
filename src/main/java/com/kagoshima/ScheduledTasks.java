@@ -1,5 +1,6 @@
 package com.kagoshima;
 
+import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +33,12 @@ public class ScheduledTasks {
         this.messageSource = messageSource;
     }
 
-    @Scheduled(cron = "0 0 0 27 * ?")
+    @Scheduled(cron = "0 0 0 27-31 * ?")
     public void performTask() {
+    	if(!isPreviousDayOfDeadline()) {
+    		return;
+    	}
+    	
         ArrayList<Employee> toList = new ArrayList<>();
 
         List<Employee> generalEmployees = employeeService.findByRole(Employee.Role.GENERAL);
@@ -72,6 +77,15 @@ public class ScheduledTasks {
         isCompleted = report.isCompleteFlg();
 
         return isCurrent && isCompleted;
+    }
+    
+    // 提出期日（月末）の前日であるか
+    private boolean isPreviousDayOfDeadline() {
+    	LocalDate now = LocalDate.now();
+    	YearMonth yearMonth = YearMonth.of(now.getYear(), now.getMonth());
+    	LocalDate lastDayOfMonth = yearMonth.atEndOfMonth();
+        boolean isPreviousDayOfDeadline = now.equals(lastDayOfMonth);
+    	return isPreviousDayOfDeadline;
     }
 
 }
