@@ -45,117 +45,133 @@ import jakarta.servlet.http.HttpServletResponse;
 @RequestMapping("reports")
 public class ReportController {
 
-    private final ReportService reportService;
-    private final EmployeeService employeeService;
-    private final ExcelService excelService;
+	private final ReportService reportService;
+	private final EmployeeService employeeService;
+	private final ExcelService excelService;
 
-    @Autowired
-    public ReportController(ReportService reportService, EmployeeService employeeService, ExcelService excelService) {
-        this.reportService = reportService;
-        this.employeeService = employeeService;
-        this.excelService = excelService;
-    }
+	@Autowired
+	public ReportController(ReportService reportService, EmployeeService employeeService, ExcelService excelService) {
+		this.reportService = reportService;
+		this.employeeService = employeeService;
+		this.excelService = excelService;
+	}
 
-    // 月報一覧画面
-    @GetMapping
-    public String list(Model model, @AuthenticationPrincipal UserDetail userDetail) {
-        List<Report> reportList = new ArrayList<>();
-        if(userDetail.getEmployee().getRole().equals(Role.ADMIN)) {
-            // 管理者権限の場合、すべてのレポートを取得
-            reportList.addAll(reportService.findAll());
-        } else {
-            // 一般権限の場合、ログインユーザと同じ所属のレポートを取得
-            List<Employee> employeeList = employeeService.findByAffiliaton(userDetail.getEmployee().getAffiliation());
-            for(Employee employee : employeeList) {
-                reportList.addAll(reportService.findByEmployee(employee));
-            }
-        }
+	// 月報一覧画面
+	@GetMapping
+	public String list(Model model, @AuthenticationPrincipal UserDetail userDetail) {
+		List<Report> reportList = new ArrayList<>();
+		YearMonth thisMonth = YearMonth.now();
+		if (userDetail.getEmployee().getRole().equals(Role.ADMIN)) {
+			// 管理者権限の場合、すべてのレポートを取得
+			List<Report> repListAll = reportService.findAll();
+			// 今月分のみ表示するように変更
+			List<Report> thisMonthReportList = reportService.getSpecifiedMonthReport(repListAll, thisMonth);
+			reportList.addAll(thisMonthReportList);
+		} else {
+			// 一般権限の場合、ログインユーザと同じ所属のレポートを取得
+			List<Employee> employeeList = employeeService.findByAffiliaton(userDetail.getEmployee().getAffiliation());
+			List<Report> reportListAll = new ArrayList<>();
+			for (Employee employee : employeeList) {
+				List<Report> repListByEmployee = reportService.findByEmployee(employee);
+				if (repListByEmployee != null) {
+					reportListAll.addAll(repListByEmployee);
+				}
+			}
+			// 今月分のみ表示するように変更
+			List<Report> thisMonthReportList = reportService.getSpecifiedMonthReport(reportListAll, thisMonth);
+			reportList.addAll(thisMonthReportList);
+		}
 
-        // 表示月選択用
-        TreeSet<YearMonth> dateSet = new TreeSet<>();
-        for(Report rep : reportList) {
-            dateSet.add(rep.getReportMonth());
-        }
+		// 表示月選択用
+		TreeSet<YearMonth> dateSet = new TreeSet<>();
+		for (Report rep : reportList) {
+			dateSet.add(rep.getReportMonth());
+		}
 
-        // 直近の報告書引き継ぎ用
-        boolean isPastCheck = reportService.findByEmployee(userDetail.getEmployee()).size() > 0;
+		// 直近の報告書引き継ぎ用
+		boolean isPastCheck = false;
+		if (reportService.findByEmployee(userDetail.getEmployee()).size() > 0) {
+			isPastCheck = true;
+		}
 
-        model.addAttribute("listSize", reportList.size());
-        model.addAttribute("reportList", reportList);
-        model.addAttribute("dateSet", dateSet);
-        model.addAttribute("isPastCheck", isPastCheck);
+		model.addAttribute("listSize", reportList.size());
+		model.addAttribute("reportList", reportList);
+		model.addAttribute("dateSet", dateSet);
+		model.addAttribute("isPastCheck", isPastCheck);
 
-        return "reports/list";
-    }
+		return "reports/list";
+	}
 
-    // 月報新規登録画面
-    @PostMapping(value = "/create")
-    public String create(@ModelAttribute Report report, @AuthenticationPrincipal UserDetail userDetail, Model model, @RequestParam(name="pastCheck", required = false) String pastCheck) {
-        model.addAttribute("fullName", userDetail.getEmployee().getFullName());
-        model.addAttribute("affiliation", userDetail.getEmployee().getAffiliation());
+	// 月報新規登録画面
+	@PostMapping(value = "/create")
+	public String create(@ModelAttribute Report report, @AuthenticationPrincipal UserDetail userDetail, Model model,
+			@RequestParam(name = "pastCheck", required = false) String pastCheck) {
+		model.addAttribute("fullName", userDetail.getEmployee().getFullName());
+		model.addAttribute("affiliation", userDetail.getEmployee().getAffiliation());
 
-        if(pastCheck != null ) {
-            // 直近の報告書を引き継ぐ場合
-            List<Report> reports = reportService.findByEmployee(userDetail.getEmployee());
-            if(reports.size() > 0) {
-                Collections.sort(reports, Comparator.comparing(Report::getReportMonth));
-                Report rep = reports.get(reports.size() - 1);
-                model.addAttribute("report", rep);
-            }
-        }
+		if (pastCheck != null) {
+			// 直近の報告書を引き継ぐ場合
+			List<Report> reports = reportService.findByEmployee(userDetail.getEmployee());
+			if (reports.size() > 0) {
+				Collections.sort(reports, Comparator.comparing(Report::getReportMonth));
+				Report rep = reports.get(reports.size() - 1);
+				model.addAttribute("report", rep);
+			}
+		}
 
-        return "reports/new";
-    }
+		return "reports/new";
+	}
 
-    // 月報新規登録処理
-    @PostMapping(value="/add")
-    public String add(@Validated Report report, BindingResult res, @AuthenticationPrincipal UserDetail userDetail, Model model) {
+	// 月報新規登録処理
+	@PostMapping(value = "/add")
+	public String add(@Validated Report report, BindingResult res, @AuthenticationPrincipal UserDetail userDetail,
+			Model model) {
 
-        // 入力チェック
-        if (res.hasErrors()) {
-            return create(report, userDetail, model, null);
-        }
+		// 入力チェック
+		if (res.hasErrors()) {
+			return create(report, userDetail, model, null);
+		}
 
-        ErrorKinds result = reportService.save(report, userDetail);
+		ErrorKinds result = reportService.save(report, userDetail);
 
-        if (ErrorMessage.contains(result)) {
-            model.addAttribute(ErrorMessage.getErrorName(ErrorKinds.DATECHECK_ERROR),
-                    ErrorMessage.getErrorValue(ErrorKinds.DATECHECK_ERROR));
-            return create(report, userDetail, model, null);
-        }
+		if (ErrorMessage.contains(result)) {
+			model.addAttribute(ErrorMessage.getErrorName(ErrorKinds.DATECHECK_ERROR),
+					ErrorMessage.getErrorValue(ErrorKinds.DATECHECK_ERROR));
+			return create(report, userDetail, model, null);
+		}
 
-        return "redirect:/reports";
-    }
+		return "redirect:/reports";
+	}
 
-    // 月報詳細画面
-    @GetMapping(value="/{id}/")
-    public String detail(@PathVariable String id, @AuthenticationPrincipal UserDetail userDetail, Model model) {
-        model.addAttribute("report", reportService.findById(id));
-        model.addAttribute("employee", userDetail.getEmployee());
-        model.addAttribute("reportId", id);
+	// 月報詳細画面
+	@GetMapping(value = "/{id}/")
+	public String detail(@PathVariable String id, @AuthenticationPrincipal UserDetail userDetail, Model model) {
+		model.addAttribute("report", reportService.findById(id));
+		model.addAttribute("employee", userDetail.getEmployee());
+		model.addAttribute("reportId", id);
 
-        return "reports/detail";
-    }
-    
-    // エクセル出力
-    @PostMapping(value="/export")
-    public void export(@RequestParam("reportId") String reportId, HttpServletResponse response) {
-    	try {
-    		Report report = reportService.findById(reportId);
-			
+		return "reports/detail";
+	}
+
+	// エクセル出力
+	@PostMapping(value = "/export")
+	public void export(@RequestParam("reportId") String reportId, HttpServletResponse response) {
+		try {
+			Report report = reportService.findById(reportId);
+
 			// 書き込み
 			Workbook workbook = excelService.createWorkbookWithReport(report);
-			
+
 			// レスポンス・ヘッダー設定
 			response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 			response.setHeader("Content-Disposition", "attachment; filename=output.xlsx");
-			
+
 			// ファイルを書き込んでユーザーにダウンロードさせる
 			OutputStream out = response.getOutputStream();
 			workbook.write(out);
 			out.close();
 			workbook.close();
-			
+
 		} catch (FileNotFoundException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
@@ -163,76 +179,76 @@ public class ReportController {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-    }
+	}
 
-    // 月報更新画面
-    @GetMapping(value = "/update/{id}/")
-    public String edit(@PathVariable String id, Model model, Report report) {
-        if(report.getEmployee() == null) {
-            // 更新画面を最初に開くときはこっち
-            model.addAttribute("report", reportService.findById(id));
-        } else {
-            // 更新処理に失敗した場合はこっち
-            model.addAttribute("report", report);
-        }
+	// 月報更新画面
+	@GetMapping(value = "/update/{id}/")
+	public String edit(@PathVariable String id, Model model, Report report) {
+		if (report.getEmployee() == null) {
+			// 更新画面を最初に開くときはこっち
+			model.addAttribute("report", reportService.findById(id));
+		} else {
+			// 更新処理に失敗した場合はこっち
+			model.addAttribute("report", report);
+		}
 
-        return "reports/update";
-    }
+		return "reports/update";
+	}
 
-    // 月報更新処理
-    @PostMapping(value = "/update")
-    public String update(@Validated Report report, BindingResult res, Model model) {
+	// 月報更新処理
+	@PostMapping(value = "/update")
+	public String update(@Validated Report report, BindingResult res, Model model) {
 
-        // Report内のEmployeeの情報がnullになっているのでここで設定しなおす
-        if(report.getEmployee() != null && report.getEmployee().getCode() != null) {
-            report.setEmployee(employeeService.findByCode(report.getEmployee().getCode()));
-        }
+		// Report内のEmployeeの情報がnullになっているのでここで設定しなおす
+		if (report.getEmployee() != null && report.getEmployee().getCode() != null) {
+			report.setEmployee(employeeService.findByCode(report.getEmployee().getCode()));
+		}
 
-        // 入力チェック
-        if (res.hasErrors()) {
-            return edit(report.getId().toString(), model, report);
-        }
-        ErrorKinds result = reportService.update(report);
+		// 入力チェック
+		if (res.hasErrors()) {
+			return edit(report.getId().toString(), model, report);
+		}
+		ErrorKinds result = reportService.update(report);
 
-        if (ErrorMessage.contains(result)) {
-            model.addAttribute(ErrorMessage.getErrorName(result), ErrorMessage.getErrorValue(result));
-            return edit(report.getId().toString(), model, report);
-        }
+		if (ErrorMessage.contains(result)) {
+			model.addAttribute(ErrorMessage.getErrorName(result), ErrorMessage.getErrorValue(result));
+			return edit(report.getId().toString(), model, report);
+		}
 
-        return "redirect:/reports";
+		return "redirect:/reports";
 
-    }
+	}
 
+	// 月報削除処理
+	@PostMapping(value = "/{id}/delete")
+	public String delete(@PathVariable String id, Model model) {
 
-    // 月報削除処理
-    @PostMapping(value = "/{id}/delete")
-    public String delete(@PathVariable String id,  Model model) {
+		reportService.delete(id);
 
-        reportService.delete(id);
+		return "redirect:/reports";
+	}
 
-        return "redirect:/reports";
-    }
+	// コメント追加
+	@PostMapping(value = "/comment")
+	public String comment(Report report, @AuthenticationPrincipal UserDetail userDetail, Model model) {
+		String id = report.getId().toString();
+		String comment = report.getComment();
+		reportService.comment(id, comment);
 
-    // コメント追加
-    @PostMapping(value = "/comment")
-    public String comment(Report report, @AuthenticationPrincipal UserDetail userDetail,  Model model) {
-        String id = report.getId().toString();
-        String comment = report.getComment();
-        reportService.comment(id, comment);
+		// 詳細画面に戻る
+		return detail(id, userDetail, model);
+	}
 
-        // 詳細画面に戻る
-        return detail(id, userDetail, model);
-    }
+	// 承認/非承認処理
+	@PostMapping(value = "/approve")
+	public String approve(Report report, @RequestParam("choice") boolean choice,
+			@AuthenticationPrincipal UserDetail userDetail, Model model) {
+		String id = report.getId().toString();
+		boolean isApprove = choice;
+		Report rep = reportService.approve(id, isApprove);
 
-    // 承認/非承認処理
-    @PostMapping(value = "/approve")
-    public String approve(Report report, @RequestParam("choice") boolean choice, @AuthenticationPrincipal UserDetail userDetail, Model model) {
-        String id = report.getId().toString();
-        boolean isApprove = choice;
-        Report rep = reportService.approve(id, isApprove);
-
-        // 詳細画面に戻る
-        return detail(rep.getId().toString(), userDetail, model);
-    }
+		// 詳細画面に戻る
+		return detail(rep.getId().toString(), userDetail, model);
+	}
 
 }

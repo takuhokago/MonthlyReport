@@ -1,19 +1,19 @@
 package com.kagoshima.service;
 
 import java.time.LocalDateTime;
+import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kagoshima.constants.ErrorKinds;
 import com.kagoshima.entity.Employee;
-import com.kagoshima.entity.Employee.Role;
 import com.kagoshima.entity.Report;
 import com.kagoshima.repository.ReportRepository;
-
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ReportService {
@@ -44,7 +44,22 @@ public class ReportService {
         List<Report> reports = reportRepository.findByEmployee(employee);
         return reports;
     }
-
+    
+    // 指定月の報告書を返す
+    public List<Report> getSpecifiedMonthReport(List<Report> reportList, YearMonth yearMonth) {
+    	List<Report> specigiedMonthReport = new ArrayList<Report>();
+    	if(yearMonth == null) {
+    		return specigiedMonthReport;
+    	}
+    	for(Report report : reportList) {
+    		if(report.getReportMonth().equals(yearMonth)) {
+    			specigiedMonthReport.add(report);
+    		}
+    	}
+    	
+    	return specigiedMonthReport;
+    }
+    
     // 月報保存
     @Transactional
     public ErrorKinds save(Report report, UserDetail userDetail) {
