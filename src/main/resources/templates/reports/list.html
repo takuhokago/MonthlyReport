@@ -50,11 +50,14 @@
                         </div>
 
                         <div class="col-2 col-lg-3 col-xl-3 col-xxl-2">
-                            <select class="form-select" aria-label="Default select example" id="selectDate">
-                                <option value="-1" selected>--表示月を選択--</option>
-                                <option th:each="item : ${dateSet}" th:value="${item}"
-                                    th:text="${#temporals.format(item, 'yyyy/MM')}"></option>
-                            </select>
+                            <form id="dateForm" th:action="@{/reports/list}" th:method="post">
+                                <select class="form-select" aria-label="Default select example" id="selectDate">
+                                    <option value="-1" selected>--表示月を選択--</option>
+                                    <option th:each="date : ${dateSet}" th:value="${date}"
+                                        th:text="${#temporals.format(date, 'yyyy年MM月')}"></option>
+                                </select>
+                                <input type="hidden" name="selectedDate" id="selectedDate" value="">
+                            </form>
                         </div>
 
                         <div class="col-2 col-lg-3 col-xl-3 col-xxl-2">
@@ -97,7 +100,7 @@
                                                 th:text="${#temporals.format(report.reportDeadline, 'yyyy/MM/dd')}">
                                             </td>
                                             <td class="align-middle" th:if="${report.submittedAt != null}"
-                                            th:text="${#temporals.format(report.submittedAt, 'yyyy/MM/dd')}">
+                                                th:text="${#temporals.format(report.submittedAt, 'yyyy/MM/dd')}">
                                             </td>
                                             <td class="align-middle" th:if="${report.submittedAt == null}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="22"
@@ -115,9 +118,9 @@
                                                     <path
                                                         d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                                                 </svg>
-                                                <svg th:if="${!report.completeFlg}"
-                                                    xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                                    fill="currentColor" class="bi bi-dash-lg" viewBox="-7 0 16 16">
+                                                <svg th:if="${!report.completeFlg}" xmlns="http://www.w3.org/2000/svg"
+                                                    width="22" height="22" fill="currentColor" class="bi bi-dash-lg"
+                                                    viewBox="-7 0 16 16">
                                                     <path fill-rule="evenodd"
                                                         d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z" />
                                                 </svg>
@@ -189,7 +192,7 @@
 
     </div>
     <script type="text/javascript" src="/js/searchTable.js"></script>
-    <script type="text/javascript" src="/js/reportsListByMonth.js"></script>
+    <script type="text/javascript" src="/js/list.js"></script>
 
 </body>
 

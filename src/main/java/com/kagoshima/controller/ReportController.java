@@ -1,7 +1,5 @@
 package com.kagoshima.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -13,10 +11,7 @@ import java.util.List;
 import java.util.TreeSet;
 
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,9 +26,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kagoshima.constants.ErrorKinds;
 import com.kagoshima.constants.ErrorMessage;
-import com.kagoshima.entity.Report;
 import com.kagoshima.entity.Employee;
 import com.kagoshima.entity.Employee.Role;
+import com.kagoshima.entity.Report;
 import com.kagoshima.service.EmployeeService;
 import com.kagoshima.service.ExcelService;
 import com.kagoshima.service.ReportService;
@@ -58,33 +53,43 @@ public class ReportController {
 
 	// 月報一覧画面
 	@GetMapping
-	public String list(Model model, @AuthenticationPrincipal UserDetail userDetail) {
+	public String list(Model model, @AuthenticationPrincipal UserDetail userDetail, YearMonth yearMonth) {
+		// 表示用
 		List<Report> reportList = new ArrayList<>();
-		YearMonth thisMonth = YearMonth.now();
+		// すべての年月の報告書
+		List<Report> repListAll = new ArrayList<>();
+		
+		YearMonth yearMonth4List = YearMonth.now();
+		if (yearMonth != null) {
+			yearMonth4List = yearMonth;
+		}
+		
 		if (userDetail.getEmployee().getRole().equals(Role.ADMIN)) {
 			// 管理者権限の場合、すべてのレポートを取得
-			List<Report> repListAll = reportService.findAll();
+			repListAll = reportService.findAll();
 			// 今月分のみ表示するように変更
-			List<Report> thisMonthReportList = reportService.getSpecifiedMonthReport(repListAll, thisMonth);
+			List<Report> thisMonthReportList = reportService.getSpecifiedMonthReport(repListAll, yearMonth4List);
 			reportList.addAll(thisMonthReportList);
 		} else {
 			// 一般権限の場合、ログインユーザと同じ所属のレポートを取得
 			List<Employee> employeeList = employeeService.findByAffiliaton(userDetail.getEmployee().getAffiliation());
-			List<Report> reportListAll = new ArrayList<>();
+			repListAll = new ArrayList<>();
 			for (Employee employee : employeeList) {
 				List<Report> repListByEmployee = reportService.findByEmployee(employee);
 				if (repListByEmployee != null) {
-					reportListAll.addAll(repListByEmployee);
+					repListAll.addAll(repListByEmployee);
 				}
 			}
 			// 今月分のみ表示するように変更
-			List<Report> thisMonthReportList = reportService.getSpecifiedMonthReport(reportListAll, thisMonth);
+			List<Report> thisMonthReportList = reportService.getSpecifiedMonthReport(repListAll, yearMonth4List);
 			reportList.addAll(thisMonthReportList);
 		}
 
+		// 新しい日付順にソートするためのComparatorを作成
+        Comparator<YearMonth> comparator = Comparator.reverseOrder();
 		// 表示月選択用
-		TreeSet<YearMonth> dateSet = new TreeSet<>();
-		for (Report rep : reportList) {
+		TreeSet<YearMonth> dateSet = new TreeSet<>(comparator);
+		for (Report rep : repListAll) {
 			dateSet.add(rep.getReportMonth());
 		}
 
@@ -100,6 +105,13 @@ public class ReportController {
 		model.addAttribute("isPastCheck", isPastCheck);
 
 		return "reports/list";
+	}
+
+	// 選択した月の報告書一覧を表示
+	@PostMapping(value = "/list")
+	public String specifiedMonthReportList(Model model, @AuthenticationPrincipal UserDetail userDetail,
+			@RequestParam("selectedDate") YearMonth selectedDate) {
+		return list(model, userDetail, selectedDate);
 	}
 
 	// 月報新規登録画面
