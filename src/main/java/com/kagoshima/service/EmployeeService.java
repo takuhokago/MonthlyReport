@@ -70,9 +70,13 @@ public class EmployeeService {
             }
         }
 
-        // プロフィールから更新時、roleがnullになる件に対応
+        // roleを再設定
         if(employee.getRole() == null) {
             employee.setRole(findByCode(employee.getCode()).getRole());
+        }
+        // reportListを再設定
+        if(reportService.findByEmployee(employee) != null) {
+        	employee.setReportList(reportService.findByEmployee(employee));
         }
 
         LocalDateTime now = LocalDateTime.now();
