@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kagoshima.constants.ErrorKinds;
+import com.kagoshima.entity.Department;
 import com.kagoshima.entity.Employee;
-import com.kagoshima.entity.Employee.Affiliation;
 import com.kagoshima.entity.Employee.Role;
 import com.kagoshima.entity.Report;
 import com.kagoshima.repository.EmployeeRepository;
@@ -126,9 +126,9 @@ public class EmployeeService {
         return employee;
     }
 
-    // Affiliationで検索
-    public List<Employee> findByAffiliaton(Affiliation affiliation) {
-        return employeeRepository.findByAffiliation(affiliation);
+    // Departmentで検索
+    public List<Employee> findByDepartment(Department department) {
+        return employeeRepository.findByDepartment(department);
     }
 
     // Roleで検索

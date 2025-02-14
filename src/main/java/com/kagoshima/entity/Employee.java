@@ -41,20 +41,6 @@ public class Employee {
         }
     }
 
-    public static enum Affiliation {
-        ICTSK("所属A"), ICTSS("所属B");
-
-        private String affiliation;
-
-        private Affiliation(String affiliation) {
-            this.affiliation = affiliation;
-        }
-
-        public String getValue() {
-            return this.affiliation;
-        }
-    }
-
     // code
     @Id
     @Column(length = 10)
@@ -94,11 +80,6 @@ public class Employee {
     // 更新日時
     @Column(nullable = false)
     private LocalDateTime updatedAt;
-
-    // 所属
-    @Column(columnDefinition = "VARCHAR(10)", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Affiliation affiliation;
 
     // メールアドレス
     @Column(length = 50, nullable = false)

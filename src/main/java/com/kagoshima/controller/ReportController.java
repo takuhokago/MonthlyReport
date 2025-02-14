@@ -72,7 +72,7 @@ public class ReportController {
 			reportList.addAll(thisMonthReportList);
 		} else {
 			// 一般権限の場合、ログインユーザと同じ所属のレポートを取得
-			List<Employee> employeeList = employeeService.findByAffiliaton(userDetail.getEmployee().getAffiliation());
+			List<Employee> employeeList = employeeService.findByDepartment(userDetail.getEmployee().getDepartment());
 			repListAll = new ArrayList<>();
 			for (Employee employee : employeeList) {
 				List<Report> repListByEmployee = reportService.findByEmployee(employee);
@@ -119,7 +119,7 @@ public class ReportController {
 	public String create(@ModelAttribute Report report, @AuthenticationPrincipal UserDetail userDetail, Model model,
 			@RequestParam(name = "pastCheck", required = false) String pastCheck) {
 		model.addAttribute("fullName", userDetail.getEmployee().getFullName());
-		model.addAttribute("affiliation", userDetail.getEmployee().getAffiliation());
+		model.addAttribute("departmentName", userDetail.getEmployee().getDepartment().getName());
 
 		if (pastCheck != null) {
 			// 直近の報告書を引き継ぐ場合

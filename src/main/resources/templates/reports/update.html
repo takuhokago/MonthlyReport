@@ -45,9 +45,6 @@
                                 本当に戻りますか？
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-close-custom" data-bs-dismiss="modal">
-                                    閉じる
-                                </button>
                                 <a th:href="@{/reports/{id}/(id=${report.id})}" class="btn btn-return-custom">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor"
                                         class="bi bi-arrow-return-left" viewBox="1 0 16 17">
@@ -97,12 +94,12 @@
                                             </div>
                                             <div class="col-3">
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="affiliation">所属</label>
+                                                    <label class="form-label" for="department">所属</label>
                                                     <p class="mb-1"></p>
                                                     <div class="col">
                                                         <input class="form-control" type="text"
-                                                            th:placeholder="${report.employee.affiliation.getValue}"
-                                                            aria-label="affiliation" readonly>
+                                                            th:placeholder="${report.employee.department.name}"
+                                                            aria-label="department" readonly>
                                                     </div>
                                                 </div>
                                             </div>

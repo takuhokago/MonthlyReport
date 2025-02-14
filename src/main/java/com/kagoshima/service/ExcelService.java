@@ -94,8 +94,8 @@ public class ExcelService {
 		
 		// C7
 		Cell cellC7 = row7.createCell(2);
-		if(report.getEmployee().getAffiliation() != null) {
-			cellC7.setCellValue(report.getEmployee().getAffiliation().getValue());
+		if(report.getEmployee().getDepartment() != null) {
+			cellC7.setCellValue(report.getEmployee().getDepartment().getName());
 		}
 		cellC7.setCellStyle(style);
 

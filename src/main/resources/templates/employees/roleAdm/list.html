@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <div class="mt-3 h-100 col-8 col-xs-10 col-md-9 col-xl-10">
+        <div class="mt-3 h-100 col-8 col-xs-10 col-md-6 col-xl-6">
             <!-- コンテンツ -->
             <div class="container-fluid p-0">
                 <h1 class="h3 mb-4">従業員 一覧</h1>
@@ -54,7 +54,6 @@
                                             <th>社員番号</th>
                                             <th>氏名</th>
                                             <th>所属</th>
-                                            <th>所属</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -63,7 +62,6 @@
                                             <td class="align-middle" th:text="${employee.code}"></td>
                                             <td class="align-middle"
                                                 th:text="${employee.lastName} + ' ' + ${employee.firstName}"></td>
-                                            <td class="align-middle" th:text="${employee.affiliation.getValue()}"></td>
                                             <td class="align-middle" th:text="${employee.department.name}"></td>
                                             <td class="align-middle">
                                                 <a th:href="@{/employees/{code}/(code=${employee.code})}"
