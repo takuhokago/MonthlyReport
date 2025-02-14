@@ -54,6 +54,7 @@
                                             <th>社員番号</th>
                                             <th>氏名</th>
                                             <th>所属</th>
+                                            <th>所属</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -63,6 +64,7 @@
                                             <td class="align-middle"
                                                 th:text="${employee.lastName} + ' ' + ${employee.firstName}"></td>
                                             <td class="align-middle" th:text="${employee.affiliation.getValue()}"></td>
+                                            <td class="align-middle" th:text="${employee.department.name}"></td>
                                             <td class="align-middle">
                                                 <a th:href="@{/employees/{code}/(code=${employee.code})}"
                                                     class="btn btn-detail-custom">

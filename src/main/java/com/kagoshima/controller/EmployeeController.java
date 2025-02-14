@@ -1,5 +1,6 @@
 package com.kagoshima.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kagoshima.constants.ErrorKinds;
 import com.kagoshima.constants.ErrorMessage;
-
+import com.kagoshima.entity.Department;
 import com.kagoshima.entity.Employee;
 import com.kagoshima.entity.Employee.Role;
 import com.kagoshima.entity.Report;
+import com.kagoshima.service.DepartmentService;
 import com.kagoshima.service.EmployeeService;
 import com.kagoshima.service.ReportService;
 import com.kagoshima.service.UserDetail;
@@ -31,11 +33,13 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
     private final ReportService reportService;
+    private final DepartmentService departmentService;
 
     @Autowired
-    public EmployeeController(EmployeeService employeeService, ReportService reportService) {
+    public EmployeeController(EmployeeService employeeService, ReportService reportService, DepartmentService departmentService) {
         this.employeeService = employeeService;
         this.reportService = reportService;
+        this.departmentService = departmentService;
     }
 
     // 従業員一覧画面
@@ -61,8 +65,14 @@ public class EmployeeController {
 
     // 従業員新規登録画面
     @GetMapping(value = "/add")
-    public String create(@ModelAttribute Employee employee) {
-
+    public String create(@ModelAttribute Employee employee, Model model) {
+    	List<Department> departmentList = new ArrayList<>();
+    	departmentList = departmentService.findAll();
+    	for(Department department : departmentList) {
+    		System.out.println(department.getName());
+    	}
+    	model.addAttribute("departmentList", departmentList);
+    	
         return "employees/roleAdm/new";
     }
 
@@ -80,13 +90,13 @@ public class EmployeeController {
             model.addAttribute(ErrorMessage.getErrorName(ErrorKinds.BLANK_ERROR),
                     ErrorMessage.getErrorValue(ErrorKinds.BLANK_ERROR));
 
-            return create(employee);
+            return create(employee, model);
 
         }
 
         // 入力チェック
         if (res.hasErrors()) {
-            return create(employee);
+            return create(employee, model);
         }
 
         // 論理削除を行った従業員番号を指定すると例外となるためtry~catchで対応
@@ -96,13 +106,13 @@ public class EmployeeController {
 
             if (ErrorMessage.contains(result)) {
                 model.addAttribute(ErrorMessage.getErrorName(result), ErrorMessage.getErrorValue(result));
-                return create(employee);
+                return create(employee, model);
             }
 
         } catch (DataIntegrityViolationException e) {
             model.addAttribute(ErrorMessage.getErrorName(ErrorKinds.DUPLICATE_EXCEPTION_ERROR),
                     ErrorMessage.getErrorValue(ErrorKinds.DUPLICATE_EXCEPTION_ERROR));
-            return create(employee);
+            return create(employee, model);
         }
 
         return "redirect:/employees";
@@ -131,6 +141,14 @@ public class EmployeeController {
         } else {
             model.addAttribute("employee", employee);
         }
+        
+        List<Department> departmentList = new ArrayList<>();
+    	departmentList = departmentService.findAll();
+    	for(Department department : departmentList) {
+    		System.out.println(department.getName());
+    	}
+    	model.addAttribute("departmentList", departmentList);
+        
         return "employees/roleAdm/update";
     }
 
@@ -179,6 +197,13 @@ public class EmployeeController {
         model.addAttribute("employee", user);
         model.addAttribute("reportList", userReports);
         model.addAttribute("listSize", userReports.size());
+        
+        List<Department> departmentList = new ArrayList<>();
+    	departmentList = departmentService.findAll();
+    	for(Department department : departmentList) {
+    		System.out.println(department.getName());
+    	}
+    	model.addAttribute("departmentList", departmentList);
 
         return "employees/roleGen/profile";
     }

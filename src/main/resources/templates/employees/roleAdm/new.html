@@ -44,9 +44,6 @@
                             本当に戻りますか？
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-close-custom" data-bs-dismiss="modal">
-                                閉じる
-                            </button>
                             <a th:href="@{/employees}" class="btn btn-return-custom">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor"
                                     class="bi bi-arrow-return-left" viewBox="1 0 16 17">
@@ -61,7 +58,7 @@
             </div>
             </p>
 
-            <div class="col-12 col-xxl-6">
+            <div class="col-12 col-xxl-11">
 
                 <div class="col-xl-11 pb-5">
                     <div class="card">
@@ -99,12 +96,14 @@
                                         </div>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">メールアドレス</label>
-                                        <p class="mb-1"></p>
-                                        <input class="form-control" type="email" th:field="*{email}" th:errorclass="err"
-                                            id="email" placeholder="name9999@ssk-kan.co.jp">
-                                        <span th:errors="*{email}" class="text-danger"></span>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">メールアドレス</label>
+                                            <p class="mb-1"></p>
+                                            <input class="form-control" type="email" th:field="*{email}"
+                                                th:errorclass="err" id="email" placeholder="name9999@ssk-kan.co.jp">
+                                            <span th:errors="*{email}" class="text-danger"></span>
+                                        </div>
                                     </div>
 
                                     <div class="mb-3">
@@ -143,7 +142,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label class="form-label" for="role">所属</label>
+                                        <label class="form-label" for="affiliation">所属</label>
                                         <p class="mb-1"></p>
                                         <div class="col-md-4">
                                             <select class="form-select" th:field="*{affiliation}" id="affiliation">
@@ -154,6 +153,20 @@
                                             </select>
                                         </div>
                                     </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label" for="department">所属</label>
+                                        <div class="col-md-4">
+                                            <select class="form-select" id="department" th:field="*{department.id}"
+                                                th:if="${departmentList != null}">
+                                                <option th:each="department : ${departmentList}"
+                                                    th:value="${department.id}" th:text="${department.name}">
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
                                     <div class="mb-3">
                                         <label class="form-label" for="role">権限</label>
                                         <p class="mb-1"></p>
