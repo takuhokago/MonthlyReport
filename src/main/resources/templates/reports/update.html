@@ -530,33 +530,7 @@
                                     <input type="hidden" th:field="*{employee.code}" id="code">
                                     <input type="hidden" th:field="*{comment}" id="comment">
                                     <input type="hidden" th:field="*{approvalFlg}" id="approvalFlg">
-
-                                    <button type="button" class="btn btn-save-custom-lg" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal">
-                                        保存
-                                    </button>
-
-                                    <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">保存確認</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                本当に保存しますか？
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-close-custom"
-                                                    data-bs-dismiss="modal">閉じる</button>
-                                                <input type="submit" value="保存" class="btn btn-save-custom">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <input type="submit" value="保存" class="btn btn-save-custom-lg">
                                 </p>
                             </form>
                         </div>
