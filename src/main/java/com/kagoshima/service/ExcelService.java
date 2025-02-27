@@ -66,6 +66,7 @@ public class ExcelService {
         styleCenter.setAlignment(HorizontalAlignment.CENTER);       // 左揃え
         styleCenter.setWrapText(true); // 折り返して全体を表示する設定
         styleCenter.setBorderTop(BorderStyle.THIN); // 上罫線の設定
+        styleCenter.setBorderLeft(BorderStyle.THIN); // 左罫線の設定
 
         // 2行目
 		Row row2 = sheet.getRow(1);
