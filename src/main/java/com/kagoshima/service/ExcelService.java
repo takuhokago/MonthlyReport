@@ -57,8 +57,15 @@ public class ExcelService {
         CellStyle styleBorderTop = sheet.getWorkbook().createCellStyle();
         styleBorderTop.setVerticalAlignment(VerticalAlignment.TOP);  // 上揃え
         styleBorderTop.setAlignment(HorizontalAlignment.LEFT);       // 左揃え
-        style.setWrapText(true); // 折り返して全体を表示する設定
+        styleBorderTop.setWrapText(true); // 折り返して全体を表示する設定
         styleBorderTop.setBorderTop(BorderStyle.THIN); // 上罫線の設定
+        
+        // 中央揃え、上罫線
+        CellStyle styleCenter = sheet.getWorkbook().createCellStyle();
+        styleCenter.setVerticalAlignment(VerticalAlignment.CENTER);  // 上揃え
+        styleCenter.setAlignment(HorizontalAlignment.CENTER);       // 左揃え
+        styleCenter.setWrapText(true); // 折り返して全体を表示する設定
+        styleCenter.setBorderTop(BorderStyle.THIN); // 上罫線の設定
 
         // 2行目
 		Row row2 = sheet.getRow(1);
@@ -71,7 +78,7 @@ public class ExcelService {
 		if(report.getReportMonth() != null) {
 			cellB2.setCellValue(String.valueOf(report.getReportMonth()));
 		}
-		cellB2.setCellStyle(style);
+		cellB2.setCellStyle(styleCenter);
 
 		// 4行目
 		Row row4 = sheet.getRow(3);
@@ -84,7 +91,7 @@ public class ExcelService {
 		if(report.getEmployee().getFullName() != null) {
 			cellC4.setCellValue(report.getEmployee().getFullName());
 		}
-		cellC4.setCellStyle(style);
+		cellC4.setCellStyle(styleCenter);
 
 		// 7行目
 		Row row7 = sheet.getRow(6);
@@ -97,7 +104,7 @@ public class ExcelService {
 		if(report.getEmployee().getDepartment() != null) {
 			cellC7.setCellValue(report.getEmployee().getDepartment().getName());
 		}
-		cellC7.setCellStyle(style);
+		cellC7.setCellStyle(styleCenter);
 
 		// 8行目
 		Row row8 = sheet.getRow(7);
@@ -123,14 +130,14 @@ public class ExcelService {
 		if(report.getTimeWorked() != null) {
 			cellC19.setCellValue(report.getTimeWorked());
 		}
-		cellC19.setCellStyle(style);
+		cellC19.setCellStyle(styleCenter);
 
 		// E19
 		Cell cellE19 = row19.createCell(4);
 		if(report.getTimeOver() != null) {
 			cellE19.setCellValue(report.getTimeOver());
 		}
-		cellE19.setCellStyle(style);
+		cellE19.setCellStyle(styleCenter);
 
 		// G19
 		Cell cellG19 = row19.createCell(6);
@@ -138,14 +145,14 @@ public class ExcelService {
 		Integer rateStudy = Optional.ofNullable(report.getRateStudy()).orElse(-999);
 		String rate = rateBusiness + " / " + rateStudy;
 		cellG19.setCellValue(rate);
-		cellG19.setCellStyle(style);
+		cellG19.setCellStyle(styleCenter);
 
 		// J19
 		Cell cellJ19 = row19.createCell(9);
 		if(report.getTrendBusiness() != null) {
 			cellJ19.setCellValue(report.getTrendBusiness());
 		}
-		cellJ19.setCellStyle(style);
+		cellJ19.setCellStyle(styleCenter);
 
 		// 20行目
 		Row row20 = sheet.getRow(19);
