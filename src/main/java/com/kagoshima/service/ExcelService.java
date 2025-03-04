@@ -2,6 +2,9 @@ package com.kagoshima.service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.YearMonth;
+import java.time.chrono.JapaneseDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
@@ -77,7 +80,7 @@ public class ExcelService {
 		// B2
 		Cell cellB2 = row2.createCell(1);
 		if(report.getReportMonth() != null) {
-			cellB2.setCellValue(String.valueOf(report.getReportMonth()));
+			cellB2.setCellValue(formatReportMonth(report.getReportMonth()));
 		}
 		cellB2.setCellStyle(styleCenter);
 
@@ -272,5 +275,26 @@ public class ExcelService {
 		}
 		cellC68.setCellStyle(style);
 		
+	}
+	
+	private String formatReportMonth(YearMonth reportMonth) {
+		// 和暦のフォーマッターを作成
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("Gyy年M月度")
+                                                       .withChronology(java.time.chrono.JapaneseChronology.INSTANCE);
+
+        // 和暦の日付オブジェクトを作成
+        JapaneseDate japaneseDate = JapaneseDate.of(reportMonth.getYear(), reportMonth.getMonthValue(), 1);
+
+        // フォーマット適用
+        String formatReportMonth = formatter.format(japaneseDate);
+        return formatReportMonth;
+	}
+	
+	public String getFileName(Report report) {
+		String templateFileName = "業務報告書_京都支社用(yearMonth_fullName)_Ver2.01.xlsx";
+		String yearMonth = report.getReportMonth().format(DateTimeFormatter.ofPattern("yyyyMM"));
+		String fullName = report.getEmployee().getFullName();
+		String fileName = templateFileName.replace("yearMonth", yearMonth).replace("fullName", fullName);
+		return fileName;
 	}
 }

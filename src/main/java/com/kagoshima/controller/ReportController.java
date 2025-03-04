@@ -3,6 +3,8 @@ package com.kagoshima.controller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,12 +60,12 @@ public class ReportController {
 		List<Report> reportList = new ArrayList<>();
 		// すべての年月の報告書
 		List<Report> repListAll = new ArrayList<>();
-		
+
 		YearMonth yearMonth4List = YearMonth.now();
 		if (yearMonth != null) {
 			yearMonth4List = yearMonth;
 		}
-		
+
 		if (userDetail.getEmployee().getRole().equals(Role.ADMIN)) {
 			// 管理者権限の場合、すべてのレポートを取得
 			repListAll = reportService.findAll();
@@ -86,7 +88,7 @@ public class ReportController {
 		}
 
 		// 新しい日付順にソートするためのComparatorを作成
-        Comparator<YearMonth> comparator = Comparator.reverseOrder();
+		Comparator<YearMonth> comparator = Comparator.reverseOrder();
 		// 表示月選択用
 		TreeSet<YearMonth> dateSet = new TreeSet<>(comparator);
 		for (Report rep : repListAll) {
@@ -174,9 +176,14 @@ public class ReportController {
 			// 書き込み
 			Workbook workbook = excelService.createWorkbookWithReport(report);
 
-			// レスポンス・ヘッダー設定
+			// レスポンス設定
 			response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-			response.setHeader("Content-Disposition", "attachment; filename=output.xlsx");
+			// ファイル名を UTF-8 でエンコード（スペースや特殊文字も安全に処理）
+			String encodedFileName = URLEncoder.encode(excelService.getFileName(report), StandardCharsets.UTF_8).replace("+", "%20");
+
+			// Content-Disposition ヘッダーを設定
+			response.setHeader("Content-Disposition",
+					"attachment; filename=\"" + encodedFileName + "\"; filename*=UTF-8''" + encodedFileName);
 
 			// ファイルを書き込んでユーザーにダウンロードさせる
 			OutputStream out = response.getOutputStream();
