@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.time.YearMonth;
 import java.time.chrono.JapaneseDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Optional;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
@@ -278,17 +279,17 @@ public class ExcelService {
 	}
 	
 	private String formatReportMonth(YearMonth reportMonth) {
-		// 和暦のフォーマッターを作成
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("Gyy年M月度")
-                                                       .withChronology(java.time.chrono.JapaneseChronology.INSTANCE);
+	    // 和暦のフォーマッターを作成（ロケールを日本に設定）
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("Gyy年M月度", Locale.JAPAN)
+	                                                   .withChronology(java.time.chrono.JapaneseChronology.INSTANCE);
 
-        // 和暦の日付オブジェクトを作成
-        JapaneseDate japaneseDate = JapaneseDate.of(reportMonth.getYear(), reportMonth.getMonthValue(), 1);
+	    // 和暦の日付オブジェクトを作成
+	    JapaneseDate japaneseDate = JapaneseDate.of(reportMonth.getYear(), reportMonth.getMonthValue(), 1);
 
-        // フォーマット適用
-        String formatReportMonth = formatter.format(japaneseDate);
-        return formatReportMonth;
+	    // フォーマット適用
+	    return formatter.format(japaneseDate);
 	}
+
 	
 	public String getFileName(Report report) {
 		String templateFileName = "業務報告書_京都支社用(yearMonth_fullName)_Ver2.01.xlsx";
