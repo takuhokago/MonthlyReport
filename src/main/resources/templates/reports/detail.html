@@ -447,37 +447,24 @@
                                                 <div class="card-body card-body-custom">
 
                                                     <div class="container">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="mb-3">
-                                                                    <label class="form-label"
-                                                                        for="evaluationBusiness">業務目標</label>
-                                                                    <p class="mb-1"></p>
-                                                                    <div class="col">
-                                                                        <textarea class="form-control" type="text"
-                                                                            th:field="*{evaluationBusiness}"
-                                                                            th:errorclass="err" id="evaluationBusiness"
-                                                                            rows="5" readonly></textarea>
-                                                                        <span th:errors="*{evaluationBusiness}"
-                                                                            class="text-danger"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="mb-3">
-                                                                    <label class="form-label"
-                                                                        for="evaluationStudy">学習目標</label>
-                                                                    <p class="mb-1"></p>
-                                                                    <div class="col">
-                                                                        <textarea class="form-control" type="text"
-                                                                            th:field="*{evaluationBusiness}"
-                                                                            th:errorclass="err" id="evaluationStudy"
-                                                                            rows="5" readonly></textarea>
-                                                                        <span th:errors="*{evaluationStudy}"
-                                                                            class="text-danger"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label"
+                                                                for="evaluationBusiness">業務目標</label>
+                                                            <p class="mb-1"></p>
+                                                            <textarea class="form-control" type="text"
+                                                                th:field="*{evaluationBusiness}" th:errorclass="err"
+                                                                id="evaluationBusiness" rows="4" readonly></textarea>
+                                                            <span th:errors="*{evaluationBusiness}"
+                                                                class="text-danger"></span>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="evaluationStudy">学習目標</label>
+                                                            <p class="mb-1"></p>
+                                                            <textarea class="form-control" type="text"
+                                                                th:field="*{evaluationBusiness}" th:errorclass="err"
+                                                                id="evaluationStudy" rows="4" readonly></textarea>
+                                                            <span th:errors="*{evaluationStudy}"
+                                                                class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -492,36 +479,22 @@
                                                 <div class="card-body card-body-custom">
 
                                                     <div class="container">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="mb-3">
-                                                                    <label class="form-label"
-                                                                        for="goalBusiness">業務目標</label>
-                                                                    <p class="mb-1"></p>
-                                                                    <div class="col">
-                                                                        <textarea class="form-control" type="text"
-                                                                            th:field="*{goalBusiness}"
-                                                                            th:errorclass="err" id="goalBusiness"
-                                                                            rows="5" readonly></textarea>
-                                                                        <span th:errors="*{goalBusiness}"
-                                                                            class="text-danger"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="mb-3">
-                                                                    <label class="form-label"
-                                                                        for="goalStudy">学習目標</label>
-                                                                    <p class="mb-1"></p>
-                                                                    <div class="col">
-                                                                        <textarea class="form-control" type="text"
-                                                                            th:field="*{goalStudy}" th:errorclass="err"
-                                                                            id="goalStudy" rows="5" readonly></textarea>
-                                                                        <span th:errors="*{goalStudy}"
-                                                                            class="text-danger"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="goalBusiness">業務目標</label>
+                                                            <p class="mb-1"></p>
+                                                            <textarea class="form-control" type="text"
+                                                                th:field="*{goalBusiness}" th:errorclass="err"
+                                                                id="goalBusiness" rows="4" readonly></textarea>
+                                                            <span th:errors="*{goalBusiness}"
+                                                                class="text-danger"></span>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="goalStudy">学習目標</label>
+                                                            <p class="mb-1"></p>
+                                                            <textarea class="form-control" type="text"
+                                                                th:field="*{goalStudy}" th:errorclass="err"
+                                                                id="goalStudy" rows="4" readonly></textarea>
+                                                            <span th:errors="*{goalStudy}" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                 </div>
