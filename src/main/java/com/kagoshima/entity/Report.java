@@ -95,17 +95,17 @@ public class Report {
 
     // その他メンバー関連内容
     @Column(columnDefinition = "LONGTEXT")
-    @Length(max = 500)
+    @Length(max = 800)
     private String contentMember;
 
     // お客様情報
     @Column(columnDefinition = "LONGTEXT")
-    @Length(max = 500)
+    @Length(max = 800)
     private String contentCustomer;
 
     // 問題点内容
     @Column(columnDefinition = "LONGTEXT")
-    @Length(max = 500)
+    @Length(max = 800)
     private String contentProblem;
 
     // 自己評価（先月業務目標）
@@ -148,7 +148,7 @@ public class Report {
 
     // コメント
     @Column(columnDefinition = "LONGTEXT")
-    @Length(max = 500)
+    @Length(max = 800)
     private String comment;
 
     // 提出期日
